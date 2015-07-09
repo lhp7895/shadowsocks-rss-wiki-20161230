@@ -46,12 +46,12 @@ MYSQL\_DB = 'shadowsocks'    #**数据库名**
 **以下仅限manyuser分支**
 
 shadowsocks目录内  
-直接运行  
+
+单用户需要再进入shadowsocks二级子目录再执行，多用户在父目录执行  
 python server.py
 
 这时可查看有运行情况，检查有没有错误。如果服务端没有错误，而连接不上，需要检查iptables或firewall(centos7)的防火墙配置
 
-单用户需要再进入shadowsocks二级子目录再执行，多用户在父目录执行  
 增加脚本可执行权限  
 chmod +x *.sh
 
@@ -63,3 +63,6 @@ chmod +x *.sh
 
 停止运行  
 ./stop.sh
+
+其它异常  
+如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
