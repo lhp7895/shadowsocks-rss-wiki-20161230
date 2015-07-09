@@ -9,8 +9,7 @@
 即不需要折腾`OpenWrt`或路由器即可获得UDP转发的能力，配置容易了很多，是游戏玩家的福音  
 如果你是用户，可向你的ss站长提议更新后端。  
 如果你是站长，可从[https://github.com/breakwa11/shadowsocks/tree/manyuser](https://github.com/breakwa11/shadowsocks/tree/manyuser)获取最新的多用户分支代码，与原版本兼容。  
-在linux上可安装git后执行  
-`git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`  
+具体配置方法可参阅[服务端配置教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup)  
 如有任何问题可发issue到github。
 
 站长注意：
