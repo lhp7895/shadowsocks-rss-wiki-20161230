@@ -2,6 +2,7 @@
 
 最新版下载链接：[http://www.mediafire.com/download/6xfd0cj2cfz6xxa](http://www.mediafire.com/download/6xfd0cj2cfz6xxa)  
 官方链接：[https://github.com/breakwa11/shadowsocks-rss](https://github.com/breakwa11/shadowsocks-rss)  
+服务端配置教程：[Wiki](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup)
 
 本版本<font color=red>支持代理UDP（以TCP转发或UDP转发均可）</font>  
 此版本支持配合使用`SocksCap64/SocksCap/ProxyCap`等工具把需要TCP和UDP代理的程序通过本版本程序转发。  
