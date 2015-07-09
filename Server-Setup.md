@@ -1,13 +1,13 @@
 # ShadowsocksR 服务端安装教程 #
 
-以root执行
+以下命令均以root用户执行，或sudo方式执行
 
 #### 基本库安装 ####
-centos  
+centos：  
 yum install python-setuptools && easy_install pip  
 yum install m2crypto git
 
-ubuntu/debian  
+ubuntu/debian：  
 apt-get install python-pip  
 apt-get install m2crypto git
 
