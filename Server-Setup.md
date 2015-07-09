@@ -4,22 +4,22 @@
 
 ### 基本库安装 ###
 centos：  
-yum install python-setuptools && easy_install pip  
-yum install m2crypto git
+`yum install python-setuptools && easy_install pip`  
+`yum install m2crypto git`
 
 ubuntu/debian：  
-apt-get install python-pip  
-apt-get install m2crypto git
+`apt-get install python-pip`  
+`apt-get install m2crypto git`
 
 ### 安装cymysql ###
 pip install cymysql
 
 ### 获取源代码 ###
 单用户版（个人用户使用这个）  
-git clone –b master https://github.com/breakwa11/shadowsocks.git  
+`git clone –b master https://github.com/breakwa11/shadowsocks.git`  
 
 多用户版（个人用户或ss站长使用这个）  
-git clone –b manyuser https://github.com/breakwa11/shadowsocks.git
+`git clone –b manyuser https://github.com/breakwa11/shadowsocks.git`
 
 执行完毕后此目录会新建一个shadowsocks目录
 
@@ -27,9 +27,9 @@ git clone –b manyuser https://github.com/breakwa11/shadowsocks.git
 如果代码有更新可用本命令更新代码
 
 进入shadowsocks目录  
-cd shadowsocks  
+`cd shadowsocks`  
 执行  
-git pull
+`git pull`
 
 ### 服务端配置 ###
 shadowsocks目录内，文件Config.py：  
@@ -48,21 +48,21 @@ MYSQL\_DB = 'shadowsocks'    #**数据库名**
 shadowsocks目录内  
 
 单用户需要再进入shadowsocks二级子目录再执行，多用户在父目录执行  
-python server.py
+`python server.py`
 
 这时可查看有运行情况，检查有没有错误。如果服务端没有错误，而连接不上，需要检查iptables或firewall(centos7)的防火墙配置
 
 增加脚本可执行权限  
-chmod +x *.sh
+`chmod +x *.sh`
 
 后台运行  
-./run.sh
+`./run.sh`
 
 后台运行时查看运行情况  
-./tail.sh
+`./tail.sh`
 
 停止运行  
-./stop.sh
+`./stop.sh`
 
 其它异常  
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
