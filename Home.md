@@ -1,4 +1,4 @@
-# ShadowsocksR CSharp 版本3.1.0 #
+# ShadowsocksR CSharp 版本3.1.1 #
 
 最新版下载链接：[http://www.mediafire.com/download/gfl4a1wog6kl050](http://www.mediafire.com/download/gfl4a1wog6kl050)  
 官方链接：[https://github.com/breakwa11/shadowsocks-rss](https://github.com/breakwa11/shadowsocks-rss)  
@@ -46,7 +46,7 @@
 
 
 #### 更新记录： ####
-版本3.1.0  
+版本3.1.1  
 1.合并主干部分代码  
 2.增加混淆UDP选项  
 3.支持接收混淆UDP包  
