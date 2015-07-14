@@ -1,12 +1,12 @@
-# ShadowsocksR CSharp 版本3.1.1 #
+# ShadowsocksR CSharp 版本3.1.2 #
 
-最新版下载链接：[http://www.mediafire.com/download/gfl4a1wog6kl050](http://www.mediafire.com/download/gfl4a1wog6kl050)  
+最新版下载链接：[http://www.mediafire.com/download/aodccv4m8x44d73](http://www.mediafire.com/download/aodccv4m8x44d73)  
 官方链接：[https://github.com/breakwa11/shadowsocks-rss](https://github.com/breakwa11/shadowsocks-rss)  
 服务端配置教程：[Wiki](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup)
 
 本版本<font color=red>支持代理UDP（以TCP转发或UDP转发均可）</font>  
 此版本支持配合使用`SocksCap64/SocksCap/ProxyCap`等工具把需要TCP和UDP代理的程序通过本版本程序转发。  
-即不需要折腾`OpenWrt`或路由器即可获得UDP转发的能力，配置容易了很多，是游戏玩家的福音  
+即不需要折腾`OpenWrt`或路由器即可在PC上获得UDP转发的能力，配置容易了很多，是游戏玩家的福音  
 如果你是用户，可向你的ss站长提议更新后端。  
 如果你是站长，可从[https://github.com/breakwa11/shadowsocks/tree/manyuser](https://github.com/breakwa11/shadowsocks/tree/manyuser)获取最新的多用户分支代码，与原版本兼容。  
 具体配置方法可参阅[服务端配置教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup)  
@@ -18,7 +18,7 @@
 	此版本的 TCP relay 和 UDP relay 支持包长度混淆
 	避免首个数据包长度过于固定带来的被认证风险
 	目前OpenWrt和Android版本的ss客户端使用原版的UDP relay
-	UDP over TCP/UDP目前仅本C#分支从2.3.1.8起支持
+	UDP over TCP/UDP目前仅本C#分支支持
 
 #### 配置术语说明： ####
 1. UDP over UDP （建议打钩）  
@@ -46,6 +46,15 @@
 
 
 #### 更新记录： ####
+版本3.1.2  
+1.连接统计窗口排序修正  
+2.重连次数配置（默认值3）  
+3.UDP over UDP选项更换为UDP over TCP，即高级选项全不打钩为通用设置，通用于所有服务端  
+4.log文件和polipo放于temp子目录  
+5.统计窗口数值格式化调整  
+6.解决config问题，移除config文件  
+7.允许密码显示
+
 版本3.1.1  
 1.合并主干部分代码  
 2.增加混淆UDP选项  
