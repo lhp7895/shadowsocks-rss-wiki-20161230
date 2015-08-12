@@ -15,10 +15,6 @@ ubuntu/debian：
 pip install cymysql
 
 ### 获取源代码 ###
-单用户版（个人用户使用这个）  
-`git clone -b master https://github.com/breakwa11/shadowsocks.git`  
-
-多用户版（个人用户或ss站长使用这个）  
 `git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`
 
 执行完毕后此目录会新建一个shadowsocks目录
@@ -55,7 +51,7 @@ shadowsocks目录内
 增加脚本可执行权限  
 `chmod +x *.sh`
 
-后台运行  
+后台运行（ssh窗口关闭后也继续运行）  
 `./run.sh`
 
 后台运行时查看运行情况  
