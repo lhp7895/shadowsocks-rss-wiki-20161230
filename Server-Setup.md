@@ -60,5 +60,14 @@ shadowsocks目录内
 停止运行  
 `./stop.sh`
 
-其它异常  
+### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
+
+如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，执行  
+`netstat -ltnap | grep -c CLOSE_WAIT`  
+显示的数值很大（超过50是严重不正常），那么请修改服务器的最大连接数，如果是ubuntu/centos均可修改  
+`/etc/security/limits.conf`  
+添加两行：  
+`*               soft    nofile           32768`  
+`*               hard    nofile           131072`  
+然后重启机器生效
