@@ -25,7 +25,8 @@ pip install cymysql
 进入shadowsocks目录  
 `cd shadowsocks`  
 执行  
-`git pull`
+`git pull`  
+成功后重启ss服务
 
 ### 服务端配置 ###
 shadowsocks目录内，文件Config.py：  
