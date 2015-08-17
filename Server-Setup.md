@@ -72,3 +72,6 @@ shadowsocks目录内
 `*               soft    nofile           32768`  
 `*               hard    nofile           131072`  
 然后重启机器生效
+
+如果还是出现大量的too many open files错误，可以通过执行以下命令确定占用大量文件数的进程：
+`lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more`
