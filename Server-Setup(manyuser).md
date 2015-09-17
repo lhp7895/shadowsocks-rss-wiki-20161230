@@ -24,11 +24,11 @@ pip install cymysql
 ### 服务端配置 ###
 shadowsocks目录内，文件Config.py： 
 ```
-MYSQL\_HOST = 'localhost'  //前端mysql域名/IP
-MYSQL\_PORT = 3306         //mysql端口
-MYSQL\_USER = 'ss'         //mysql用户名(建议不要用Root账户)
-MYSQL\_PASS = 'ss'         //mysql密码
-MYSQL\_DB = 'shadowsocks'  //数据库名
+MYSQL_HOST = 'localhost'  //前端mysql域名/IP
+MYSQL_PORT = 3306         //mysql端口
+MYSQL_USER = 'ss'         //mysql用户名(建议不要用Root账户)
+MYSQL_PASS = 'ss'         //mysql密码
+MYSQL_DB = 'shadowsocks'  //数据库名
 ```
 文件config.json： 
 ```
@@ -36,7 +36,7 @@ MYSQL\_DB = 'shadowsocks'  //数据库名
 ```
 
 数据库字段说明:
-   ```
+```
   id                 //用户id
   email              //用户邮箱
   pass               //用户密码
@@ -51,7 +51,7 @@ MYSQL\_DB = 'shadowsocks'  //数据库名
   type               //保留字段
   last_get_gift_time    //保留字段
   last_rest_pass_time   //保留字段
-  ```
+```
 
 ### 服务端运行与停止 ###
 
