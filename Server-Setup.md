@@ -19,7 +19,7 @@ pip install cymysql
 ### 获取源代码 ###
 `git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`
 
-执行完毕后此目录会新建一个shadowsocks目录，其中根目录的是多用户版（即数据库版），子目录中的是单用户版。
+执行完毕后此目录会新建一个shadowsocks目录，其中根目录的是多用户版（即数据库版，个人用户请忽略这个），子目录中的是单用户版。
 
 
 
