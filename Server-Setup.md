@@ -63,7 +63,7 @@ pip install cymysql
     "fast_open": false
 }
 ```
-把以下选项替换成你自己的：
+然后把以下选项替换成你自己的：
 ```
 "port_password":{                  
          "80":"password1",       //端口和密码 
