@@ -1,9 +1,10 @@
 # ShadowsocksR 服务端安装教程 #
-（此教程为单用户版，适合个人用户。如果你是站长，请点击这里查看多用户版教程：[多用户版教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser))）
-
-以下命令均以root用户执行，或sudo方式执行
+##说明：
+此教程为单用户版，适合个人用户。如果你是站长，请点击这里查看多用户版教程：[多用户版教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser))
 
 ### 基本库安装 ###
+以下命令均以root用户执行，或sudo方式执行
+
 centos：  
 `yum install python-setuptools && easy_install pip`  
 `yum install m2crypto git`
