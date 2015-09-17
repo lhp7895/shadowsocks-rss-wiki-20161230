@@ -17,7 +17,66 @@ pip install cymysql
 ### 获取源代码 ###
 `git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`
 
-执行完毕后此目录会新建一个shadowsocks目录
+执行完毕后此目录会新建一个shadowsocks目录，其中根目录的是多用户版（即数据库版），子目录中的是单用户版。
+
+
+
+
+### 服务端配置 ###
+建立配置文件 `vi /etc/shadowsocks.json`
+
+写入以下内容：
+```
+{
+    "server":"0.0.0.0",
+    "server_ipv6": "::",
+    "server_port":8388,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"mypassword",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+}
+```
+
+把以下选项替换成你自己的：
+```
+"server_port":8388        //端口
+"password":"password"     //密码
+"method":"aes-256-cfb"    //加密方式
+```
+如果要多个用户一起使用的话，请写入以下配置：
+
+```
+{
+    "server":"0.0.0.0",
+    "server_ipv6": "[::]",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":{
+         "80":"password1",
+         "443":"password2"
+    },
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+}
+```
+把以下选项替换成你自己的：
+```
+"port_password":{                  
+         "80":"password1",       //端口和密码 
+         "443":"password2"         
+
+method":"aes-256-cfb            //加密方式
+```
+
+运行子目录内的server.py（假如你的ss在root目录）：
+`python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json`
+
+如果要在后台执行，在前面加nohup即可：
+`nohup python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json`
 
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
@@ -27,39 +86,6 @@ pip install cymysql
 执行  
 `git pull`  
 成功后重启ss服务
-
-### 服务端配置 ###
-shadowsocks目录内，文件Config.py：  
-MYSQL\_HOST = 'mdss.mengsky.net' #**前端mysql域名/IP**  
-MYSQL\_PORT = 3306    #**mysql端口**  
-MYSQL\_USER = 'ss'    #**mysql用户名(建议不要用Root账户)**  
-MYSQL\_PASS = 'ss'    #**mysql密码**  
-MYSQL\_DB = 'shadowsocks'    #**数据库名**  
-
-文件config.json：  
-"method":"aes-256-cfb",    #**修改成您要的加密方式的名称**
-
-### 服务端运行与停止 ###
-**以下仅限manyuser分支**
-
-shadowsocks目录内  
-
-单用户需要再进入shadowsocks二级子目录再执行，多用户在父目录执行  
-`python server.py`
-
-这时可查看有运行情况，检查有没有错误。如果服务端没有错误，而连接不上，需要检查iptables或firewall(centos7)的防火墙配置
-
-增加脚本可执行权限  
-`chmod +x *.sh`
-
-后台运行（ssh窗口关闭后也继续运行）  
-`./run.sh`
-
-后台运行时查看运行情况  
-`./tail.sh`
-
-停止运行  
-`./stop.sh`
 
 ### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
