@@ -73,11 +73,14 @@ method":"aes-256-cfb            //加密方式
 ```
 
 运行子目录内的server.py（假如你的ss在root目录）：
-`python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json`
+```
+python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json
+```
 
 如果要在后台执行，在前面加nohup即可：
-`nohup python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json`
-
+```
+nohup python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json`
+```
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
 
