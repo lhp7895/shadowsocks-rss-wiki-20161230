@@ -26,7 +26,7 @@ pip install cymysql
 建立配置文件 `vi /etc/shadowsocks.json`
 
 写入以下内容：
-```
+```javascript
 {
     "server":"0.0.0.0",
     "server_ipv6": "::",
@@ -48,7 +48,7 @@ pip install cymysql
 ```
 如果要多个用户一起使用的话，请写入以下配置：
 
-```
+```javascript
 {
     "server":"0.0.0.0",
     "server_ipv6": "[::]",
