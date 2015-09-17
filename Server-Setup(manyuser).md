@@ -1,4 +1,4 @@
-# ShadowsocksR 服务端安装教程(多用户版) #
+# ShadowsocksR 多用户版安装教程 #
 
 以下命令均以root用户执行，或sudo方式执行
 
