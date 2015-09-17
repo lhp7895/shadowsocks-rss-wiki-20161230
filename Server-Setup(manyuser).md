@@ -21,14 +21,17 @@ pip install cymysql
 
 ### 服务端配置 ###
 shadowsocks目录内，文件Config.py： 
-MYSQL\_HOST = 'mdss.mengsky.net' #**前端mysql域名/IP** 
-MYSQL\_PORT = 3306    #**mysql端口** 
-MYSQL\_USER = 'ss'    #**mysql用户名(建议不要用Root账户)** 
-MYSQL\_PASS = 'ss'    #**mysql密码** 
-MYSQL\_DB = 'shadowsocks'    #**数据库名** 
-
+```
+MYSQL\_HOST = 'localhost'  //前端mysql域名/IP** 
+MYSQL\_PORT = 3306         //mysql端口** 
+MYSQL\_USER = 'ss'         //mysql用户名(建议不要用Root账户)** 
+MYSQL\_PASS = 'ss'         //mysql密码** 
+MYSQL\_DB = 'shadowsocks'  //数据库名** 
+```
 文件config.json： 
-"method":"aes-256-cfb",    #**修改成您要的加密方式的名称**
+```
+"method":"aes-256-cfb",    //修改成您要的加密方式的名称
+```
 
 数据库字段说明:
    ```
