@@ -4,13 +4,15 @@
 
 ### 基本库安装 ###
 centos： 
-`yum install python-setuptools && easy_install pip` 
-`yum install m2crypto git`
-
+```
+yum install python-setuptools && easy_install pip
+yum install m2crypto git
+```
 ubuntu/debian： 
-`apt-get install python-pip` 
-`apt-get install m2crypto git`
-
+```
+apt-get install python-pip
+apt-get install m2crypto git
+```
 ### 安装cymysql ###
 pip install cymysql
 
