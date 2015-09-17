@@ -1,5 +1,5 @@
 # ShadowsocksR 服务端安装教程 #
-（此教程为单用户版，适合个人用户。如果你是站长，请看这篇多用户版教程：https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser)）
+（此教程为单用户版，适合个人用户。如果你是站长，请点击这里查看多用户版教程：[多用户版教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser))）
 
 以下命令均以root用户执行，或sudo方式执行
 
