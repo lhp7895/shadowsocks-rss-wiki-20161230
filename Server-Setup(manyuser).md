@@ -58,29 +58,38 @@ MYSQL\_DB = 'shadowsocks'  //数据库名
 shadowsocks目录内 
 
 多用户在父目录执行 
+
 `python server.py`
 
 这时可查看有运行情况，检查有没有错误。如果服务端没有错误，而连接不上，需要检查iptables或firewall(centos7)的防火墙配置
 
 增加脚本可执行权限 
+
 `chmod +x *.sh`
 
 后台运行（ssh窗口关闭后也继续运行） 
+
 `./run.sh`
 
 后台运行时查看运行情况 
+
 `./tail.sh`
 
 停止运行 
+
 `./stop.sh`
 
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
 
 进入shadowsocks目录 
+
 `cd shadowsocks` 
+
 执行 
+
 `git pull` 
+
 成功后重启ss服务
 
 ### 其它异常 ###
@@ -93,6 +102,7 @@ shadowsocks目录内
 显示的数值很大（超过50是严重不正常），那么请修改服务器的最大连接数，如果是ubuntu/centos均可修改 
 
 `/etc/security/limits.conf` 
+
 添加两行： 
 
 `*               soft    nofile           32768` 
