@@ -77,9 +77,9 @@ method":"aes-256-cfb            //加密方式
 python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json
 ```
 
-如果要在后台执行，在前面加nohup即可：
+如果要在后台运行，在前面加nohup即可：
 ```
-nohup python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json
+nohup python /root/shadowsocks/shadowsocks/server.py -c /etc/shadowsocks.json &
 ```
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
