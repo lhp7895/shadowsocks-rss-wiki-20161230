@@ -24,7 +24,7 @@ ubuntu/debian：
 
 ### 服务端配置 ###
 
-#快捷运行#
+####快捷运行#####
 ```
 server.py -p 443 -k password -m rc4-md5
 ```
@@ -37,7 +37,7 @@ server.py -p 443 -k password -m rc4-md5 --user nobody -d start
 server.py -d stop
 ```
 
-#通过配置文件运行#
+####通过配置文件运行####
 
 建立配置文件 `vi /etc/shadowsocks.json`
 
