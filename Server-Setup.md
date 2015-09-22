@@ -26,11 +26,11 @@ ubuntu/debian：
 
 ####快捷运行#####
 ```
-server.py -p 443 -k password -m rc4-md5
+server.py -p 443 -k password -m aes-256-cfb
 ```
 如果要后台运行：
 ```
-server.py -p 443 -k password -m rc4-md5 --user nobody -d start
+server.py -p 443 -k password -m aes-256-cfb -d start
 ```
 如果要停止：
 ```
