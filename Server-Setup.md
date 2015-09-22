@@ -18,11 +18,27 @@ ubuntu/debian：
 `git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`
 
 执行完毕后此目录会新建一个shadowsocks目录，其中根目录的是多用户版（即数据库版，个人用户请忽略这个），子目录中的是单用户版。
-
+以下命令均在子目录中执行。
 
 
 
 ### 服务端配置 ###
+
+#快捷运行#
+```
+server.py -p 443 -k password -m rc4-md5
+```
+如果要后台运行：
+```
+server.py -p 443 -k password -m rc4-md5 --user nobody -d start
+```
+如果要停止：
+```
+server.py -d stop
+```
+
+#通过配置文件运行#
+
 建立配置文件 `vi /etc/shadowsocks.json`
 
 写入以下内容：
@@ -36,16 +52,32 @@ ubuntu/debian：
     "password":"mypassword",
     "timeout":300,
     "method":"aes-256-cfb",
-    "fast_open": false
+    "fast_open": false,
+    "workers": 1
 }
 ```
 
-把以下选项替换成你自己的：
+各选项说明：
+
+Name    |    Explanation  | 中文说明
+------- | --------------- | ---------------
+server |	the address your server listens | 监听地址
+server_port |	server port                     | 监听端口
+local_address|	the address your local listens  | 本地地址
+local_port |	local port                      | 本地端口
+password |	password used for encryption    | 密码
+timeout |	in seconds                      | 超时时间
+method |	default: "aes-256-cfb", see Encryption | 加密方式
+fast_open |	use TCP_FASTOPEN, true / false         | 仅限linux客户端
+workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
+
+一般情况下，只需要修改以下三项即可：
 ```
-"server_port":8388        //端口
-"password":"password"     //密码
-"method":"aes-256-cfb"    //加密方式
+"server_port":8388,        //端口
+"password":"password",     //密码
+"method":"aes-256-cfb",    //加密方式
 ```
+
 如果要多个用户一起使用的话，请写入以下配置：
 
 ```javascript
@@ -60,16 +92,16 @@ ubuntu/debian：
     },
     "timeout":300,
     "method":"aes-256-cfb",
-    "fast_open": false
+    "fast_open": false,
+    "workers": 1
 }
 ```
-然后把以下选项替换成你自己的：
+按照格式修改端口和密码：
 ```
 "port_password":{                  
-         "80":"password1",       //端口和密码 
-         "443":"password2"         
-
-method":"aes-256-cfb            //加密方式
+         "80":"password1",       //端口和密码1
+         "443":"password2"       //端口和密码2 
+        },         
 ```
 
 运行子目录内的server.py（假如你的ss在root目录）：
