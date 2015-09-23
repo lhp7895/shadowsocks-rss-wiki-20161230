@@ -22,6 +22,7 @@
 python server.py -p 443 -k password -m aes-256-cfb
 
 #说明：-p 端口 -k 密码  -m 加密方式
+```
 
 ####通过配置文件运行####
 
@@ -60,6 +61,7 @@ python server.py -p 443 -k password -m aes-256-cfb
 
 客户端
 -----
+
 ```
 python local.py -s server_ip -p 443 -k password -m aes-256-cfb
 
