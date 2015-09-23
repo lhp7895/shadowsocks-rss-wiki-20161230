@@ -54,7 +54,7 @@ python local.py -s server_ip -p 443 -k password -m aes-256-cfb
 "method":"aes-256-cfb",    //加密方式
 ```
 
-运行:
+运行（请自行替换shadowsocks.json文件路径）:
 
     python local.py -c shadowsocks.json
 
