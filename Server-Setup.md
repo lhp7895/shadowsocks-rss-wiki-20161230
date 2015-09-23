@@ -39,9 +39,9 @@ python server.py -p 443 -k password -m aes-256-cfb
 ```
 python server.py -p 443 -k password -m aes-256-cfb -d start
 ```
-如果要停止：
+如果要停止/重启：
 ```
-python server.py -d stop
+python server.py -d stop/restart
 ```
 查看日志：
 ```
@@ -75,13 +75,14 @@ tail -f /var/log/shadowsocks.log
 Name    |    Explanation  | 中文说明
 ------- | --------------- | ---------------
 server |	the address your server listens | 监听地址
+server_ipv6 |   the ipv6 address your server listens  | ipv6地址
 server_port |	server port                     | 监听端口
 local_address|	the address your local listens  | 本地地址
 local_port |	local port                      | 本地端口
 password |	password used for encryption    | 密码
 timeout |	in seconds                      | 超时时间
 method |	default: "aes-256-cfb", see Encryption | 加密方式
-fast_open |	use TCP_FASTOPEN, true / false         | 快速打开()
+fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
 
 一般情况下，只需要修改以下三项即可：
@@ -126,9 +127,9 @@ python server.py -c /etc/shadowsocks.json
 ```
 python server.py -c /etc/shadowsocks.json -d start
 ```
-如果要停止：
+如果要停止/重启：
 ```
-python server.py -c /etc/shadowsocks.json -d stop
+python server.py -c /etc/shadowsocks.json -d stop/restart
 ```
 查看日志：
 ```
@@ -163,7 +164,7 @@ tail -f /var/log/shadowsocks.log
 
 在你本地的 PC 或手机上使用图形客户端。具体使用参见它们的使用说明。
 
-也可以直接使用 [Python] 版客户端（跨平台）。
+也可以直接使用 [Python] 版客户端（命令行）。
 
 ### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
@@ -178,7 +179,8 @@ tail -f /var/log/shadowsocks.log
 然后重启机器生效
 
 如果还是出现大量的too many open files错误，可以通过执行以下命令确定占用大量文件数的进程：
-`lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more`
+
+    lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more
 
 
 
