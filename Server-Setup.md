@@ -26,15 +26,15 @@ ubuntu/debian：
 
 ####快捷运行#####
 ```
-server.py -p 443 -k password -m aes-256-cfb
+python server.py -p 443 -k password -m aes-256-cfb
 ```
 如果要后台运行：
 ```
-server.py -p 443 -k password -m aes-256-cfb -d start
+python server.py -p 443 -k password -m aes-256-cfb -d start
 ```
 如果要停止：
 ```
-server.py -d stop
+python server.py -d stop
 ```
 
 ####通过配置文件运行####
