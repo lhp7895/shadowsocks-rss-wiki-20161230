@@ -1,4 +1,4 @@
-#在Windows上安装服务端/客户端(python版)#
+#在Windows上安装服务端/客户端#
 
 * 安装[Python]
 
@@ -6,6 +6,7 @@
 
 * 安装 [OpenSSL for Windows]
 * 安装 [git] 或 [手动下载zip源码包]
+
 
 获取源代码
 -----
