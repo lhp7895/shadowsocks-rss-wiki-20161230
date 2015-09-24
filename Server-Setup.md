@@ -7,12 +7,12 @@
 以下命令均以root用户执行，或sudo方式执行
 
 centos：  
-`yum install python-setuptools && easy_install pip`  
-`yum install m2crypto git`
+
+    yum install m2crypto git
 
 ubuntu/debian：  
-`apt-get install python-pip`  
-`apt-get install m2crypto git`
+ 
+    apt-get install m2crypto git
 
 
 获取源代码
