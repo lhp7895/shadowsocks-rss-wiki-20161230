@@ -21,6 +21,9 @@ ubuntu/debian：
 
 执行完毕后此目录会新建一个shadowsocks目录，其中根目录的是多用户版（即数据库版，个人用户请忽略这个），子目录中的是单用户版(即shadowsocks/shadowsocks)。
 
+根目录即 ./shadowsocks
+
+子目录即 ./shadowsocks/shadowsocks
 
 服务端配置
 -----
