@@ -1,4 +1,6 @@
 # ShadowsocksR 多用户版安装教程 #
+注:多用户版需配合 [ss-panel] 等前端使用。
+
 
 以下命令均以root用户执行，或sudo方式执行
 
@@ -20,6 +22,11 @@ pip install cymysql
 `git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`
 
 执行完毕后此目录会新建一个shadowsocks目录，其中根目录的是多用户版（即数据库版），子目录中的是单用户版。
+
+根目录即 ./shadowsocks
+
+子目录即 ./shadowsocks/shadowsocks 
+
 
 ### 服务端配置 ###
 shadowsocks目录内，文件Config.py： 
@@ -55,13 +62,17 @@ MYSQL_DB = 'shadowsocks'  //数据库名
 
 ### 服务端运行与停止 ###
 
-shadowsocks目录内 
-
-多用户在父目录执行 
-
-`python server.py`
+进入根目录：
+    
+    cd shadowsocks
+ 
+运行：
+    
+    python server.py
 
 这时可查看有运行情况，检查有没有错误。如果服务端没有错误，而连接不上，需要检查iptables或firewall(centos7)的防火墙配置
+
+#### 通过脚本运行 ####
 
 增加脚本可执行权限 
 
@@ -78,6 +89,8 @@ shadowsocks目录内
 停止运行 
 
 `./stop.sh`
+
+注：通过脚本运行默认日志会保存在根目录的ssserver.log，可手动查看。
 
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
@@ -112,3 +125,11 @@ shadowsocks目录内
 如果还是出现大量的too many open files错误，可以通过执行以下命令确定占用大量文件数的进程：
 
 `lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more`
+
+
+
+
+
+
+
+[ss-panel]:            https://github.com/orvice/ss-panel
