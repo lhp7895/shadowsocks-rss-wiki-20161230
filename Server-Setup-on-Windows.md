@@ -1,4 +1,4 @@
-#在Windows上安装服务端/客户端#
+#在Windows上安装服务端/客户端(python版)#
 
 * 安装[Python]
 
@@ -59,7 +59,7 @@ python server.py -p 443 -k password -m aes-256-cfb
     python server.py
 
 
-客户端
+客户端(python版)
 -----
 
 ```
