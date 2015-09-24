@@ -94,6 +94,13 @@ python local.py -s server_ip -p 443 -k password -m aes-256-cfb
     tail -f /var/log/shadowsocks.log
 
 
+设置代理：
+-------
+
+默认地址：127.0.0.1   默认端口: 1080 
+
+注：python版客户端只支持socks代理。
+
 
 
 [在Windows上安装服务端/客户端]:   https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup-on-Windows
