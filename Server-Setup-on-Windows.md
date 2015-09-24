@@ -1,11 +1,11 @@
 #在Windows上安装服务端/客户端#
 
-1. 安装[Python]
+* 安装[Python]
 
-![](https://cloud.githubusercontent.com/assets/493124/5639371/0b91b9fa-9650-11e4-9782-44526d25f2fa.png)
+       ![](https://cloud.githubusercontent.com/assets/493124/5639371/0b91b9fa-9650-11e4-9782-44526d25f2fa.png)
 
-2. 安装 [OpenSSL for Windows]
-3. 安装 [git] 或 [手动下载zip源码包]
+* 安装 [OpenSSL for Windows]
+* 安装 [git] 或 [手动下载zip源码包]
 
 获取源代码
 -----
