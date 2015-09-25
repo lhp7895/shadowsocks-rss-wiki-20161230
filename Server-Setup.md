@@ -86,6 +86,7 @@ local_port |	local port                      | 本地端口
 password |	password used for encryption    | 密码
 timeout |	in seconds                      | 超时时间
 method |	default: "aes-256-cfb", see Encryption | 加密方式
+obfs   |      "plain" 为不混淆，"http_simple"为混淆      | 协议混淆，默认"http_simple"
 fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
 
@@ -96,6 +97,7 @@ workers	| number of workers, available on Unix/Linux   |线程（仅限linux客�
 "method":"aes-256-cfb",    //加密方式
 ```
 
+####多端口配置####
 如果要多个用户一起使用的话，请写入以下配置：
 
 ```javascript
@@ -161,6 +163,7 @@ tail -f /var/log/shadowsocks.log
 
 客户端
 ------
+注：以下客户端只有windows客户端和python版客户端可以使用ssr新特性，其他原版客户端只能以兼容的方式连接ssr服务器（目前ssr仍兼容大部分旧版客户端）。
 
 * [Windows] / [OS X]
 * [Linux]
