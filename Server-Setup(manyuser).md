@@ -16,7 +16,8 @@ apt-get install python-pip
 apt-get install m2crypto git
 ```
 ### 安装cymysql ###
-pip install cymysql
+
+    pip install cymysql
 
 ### 获取源代码 ###
 `git clone -b manyuser https://github.com/breakwa11/shadowsocks.git`
