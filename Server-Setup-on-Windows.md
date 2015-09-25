@@ -40,6 +40,7 @@ python server.py -p 443 -k password -m aes-256-cfb
     "password":"mypassword",
     "timeout":300,
     "method":"aes-256-cfb",
+    "obfs":"http_simple",
     "fast_open": false,
     "workers": 1
 }
@@ -84,6 +85,7 @@ python local.py -s server_ip -p 443 -k password -m aes-256-cfb
     "password":"mypassword",
     "timeout":300,
     "method":"aes-256-cfb",
+    "obfs":"http_simple",
     "fast_open": false,
     "workers": 1
 }
