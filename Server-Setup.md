@@ -68,6 +68,7 @@ tail -f /var/log/shadowsocks.log
     "password":"mypassword",
     "timeout":300,
     "method":"aes-256-cfb",
+    "obfs":"http_simple",
     "fast_open": false,
     "workers": 1
 }
@@ -109,6 +110,7 @@ workers	| number of workers, available on Unix/Linux   |线程（仅限linux客�
     },
     "timeout":300,
     "method":"aes-256-cfb",
+    "obfs":"http_simple",
     "fast_open": false,
     "workers": 1
 }
