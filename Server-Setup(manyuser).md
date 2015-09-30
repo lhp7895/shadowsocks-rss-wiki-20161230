@@ -118,9 +118,10 @@ MYSQL_DB = 'shadowsocks'  //数据库名
 `/etc/security/limits.conf` 
 
 添加两行： 
-
-`*               soft    nofile           32768` 
-`*               hard    nofile           131072` 
+```
+*               soft    nofile           32768
+*               hard    nofile           131072
+```
 然后重启机器生效
 
 如果还是出现大量的too many open files错误，可以通过执行以下命令确定占用大量文件数的进程：
