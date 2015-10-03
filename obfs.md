@@ -16,13 +16,3 @@
 
 以上插件里http_simple的延迟最低，和原协议性能最接近。另外两种多一次握手的来回通讯时间，稍慢一些。
 
-混淆配置方法：
------------
-
-服务端使用最新SSR的manyuser分支，config.json里有一个obfs的字段，目前的可能取值为：plain, http_simple, tls_simple, random_head。
-
-plain表示不混淆。默认为"obfs":"http_simple",
-
-客户端使用本版本，在编辑服务器配置里的，找到相应节点，最后在obfs的列表里选择即可
-
-服务端配置为http_simple时，可以兼容配置为plain的客户端连接
