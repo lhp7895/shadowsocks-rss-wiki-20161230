@@ -86,14 +86,29 @@ local_port |	local port                      | 本地端口
 password |	password used for encryption    | 密码
 timeout |	in seconds                      | 超时时间
 method |	default: "aes-256-cfb", see Encryption | 加密方式
-obfs   |      "plain" 为不混淆，"http_simple"为混淆      | 协议混淆，默认"http_simple"
+obfs   |      default："http_simple"     | 混淆插件，默认"http_simple"
 fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
 
-一般情况下，只需要修改以下三项即可：
+其中obfs有如下四种取值：
+
+obfs   | 说明
+-------|----------
+"plain"|不混淆
+"http_simple"|混淆
+"tls_simple"|混淆
+"random_head"|混淆
+
+各混淆插件的说明请点击这里查看：[混淆插件说明]
+
+注：客户端的obfs配置必须与服务端的一致。
+
+
+一般情况下，只需要修改以下四项即可：
 ```
 "server_port":8388,        //端口
 "password":"password",     //密码
+"obfs":"http_simple",     //混淆插件
 "method":"aes-256-cfb",    //加密方式
 ```
 
@@ -125,7 +140,29 @@ workers	| number of workers, available on Unix/Linux   |线程（仅限linux客�
         },         
 ```
 
-运行子目录内的server.py：
+如果要为每个端口配置不同的混淆协议，请写入以下配置：
+
+```javascript
+{
+"server":"0.0.0.0",
+"server_ipv6":"::",
+"local_address":"127.0.0.1",
+"local_port":1080,
+"port_password":{
+    "8388":["password1","http_simple"],
+    "8389":["password2","random_head"]
+},
+"timeout":300,
+"method":"aes-256-cfb",
+"obfs":"http_simple",
+"fast_open": false,
+"workers": 1
+}
+```
+按格式修改端口、密码以及混淆协议。也可以和以前的格式混合使用，如果某个端口不配置混淆协议，则会使用下面的默认"obfs"配置。
+
+
+####运行子目录内的server.py：####
 ```
 python server.py -c /etc/shadowsocks.json
 ```
@@ -191,7 +228,7 @@ tail -f /var/log/shadowsocks.log
     lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more
 
 
-
+[混淆插件说明]:        https://github.com/breakwa11/shadowsocks-rss/wiki/obfs
 [Python]:            https://github.com/breakwa11/shadowsocks-rss/wiki/Python-client
 [Linux]:             https://github.com/librehat/shadowsocks-qt5
 [Android]:           https://github.com/shadowsocks/shadowsocks-android
