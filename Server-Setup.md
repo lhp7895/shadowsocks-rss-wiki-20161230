@@ -98,6 +98,8 @@ obfs   | 说明
 "http_simple"|混淆
 "tls_simple"|混淆
 "random_head"|混淆
+"verify_simple"|混淆
+"verify_deflate"|混淆
 
 各混淆插件的说明请点击这里查看：[混淆插件说明]
 
@@ -122,8 +124,8 @@ obfs   | 说明
     "local_address":"127.0.0.1",
     "local_port":1080,
     "port_password":{
-         "80":"password1",
-         "443":"password2"
+        "80":"password1",
+        "443":"password2"
     },
     "timeout":300,
     "method":"aes-256-cfb",
