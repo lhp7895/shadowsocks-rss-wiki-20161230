@@ -134,29 +134,28 @@ obfs   | 说明
 ```
 按照格式修改端口和密码：
 ```
-"port_password":{                  
-         "80":"password1",       //端口和密码1
-         "443":"password2"       //端口和密码2 
-        },         
+    "port_password":{                  
+        "80":"password1",       //端口和密码1
+        "443":"password2"       //端口和密码2 
+    },         
 ```
 
 如果要为每个端口配置不同的混淆协议，请写入以下配置：
 
 ```javascript
 {
-"server":"0.0.0.0",
-"server_ipv6":"::",
-"local_address":"127.0.0.1",
-"local_port":1080,
-"port_password":{
-    "8388":["password1","http_simple"],
-    "8389":["password2","random_head"]
-},
-"timeout":300,
-"method":"aes-256-cfb",
-"obfs":"http_simple",
-"fast_open": false,
-"workers": 1
+    "server":"0.0.0.0",
+    "server_ipv6":"::",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":{
+        "8388":["password1","http_simple"],
+        "8389":["password2","random_head"]
+    },
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false,
+    "workers": 1
 }
 ```
 按格式修改端口、密码以及混淆协议。也可以和以前的格式混合使用，如果某个端口不配置混淆协议，则会使用下面的默认"obfs"配置。
