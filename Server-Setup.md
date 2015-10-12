@@ -32,15 +32,15 @@ ubuntu/debian：
 cd shadowsocks/shadowsocks
 ```
 
-####快捷运行####
+####快速运行####
 ```
-python server.py -p 443 -k password -m aes-256-cfb
+python server.py -p 443 -k password -m aes-256-cfb -o http_simple
 
-#说明：-p 端口 -k 密码  -m 加密方式
+#说明：-p 端口 -k 密码  -m 加密方式 -o 混淆插件
 ```
 如果要后台运行：
 ```
-python server.py -p 443 -k password -m aes-256-cfb -d start
+python server.py -p 443 -k password -m aes-256-cfb -o http_simple -d start
 ```
 如果要停止/重启：
 ```
