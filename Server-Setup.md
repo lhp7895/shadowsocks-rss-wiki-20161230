@@ -8,7 +8,7 @@
 
 centos：  
 
-    yum install m2crypto git
+    yum install m2crypto git libsodium（支持chacha20/salsa20）
 
 ubuntu/debian：  
  
