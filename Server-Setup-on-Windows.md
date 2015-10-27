@@ -20,10 +20,12 @@
 
 ####快捷运行####
 ```
-python server.py -p 443 -k password -m aes-256-cfb
+python server.py -s server_ip -p 443 -k password -m aes-256-cfb -o http_simple
 
-#说明：-p 端口 -k 密码  -m 加密方式
+#说明：-p 端口 -k 密码  -m 加密方式 -o 混淆插件
 ```
+
+用 -h 查看所有参数。
 
 ####通过配置文件运行####
 
@@ -65,10 +67,12 @@ python server.py -p 443 -k password -m aes-256-cfb
 -----
 
 ```
-python local.py -s server_ip -p 443 -k password -m aes-256-cfb
+python local.py -s server_ip -p 443 -k password -m aes-256-cfb -o http_simple
 
-#说明：-s 服务器地址 -p 端口 -k 密码  -m 加密方式
+#说明：-p 端口 -k 密码  -m 加密方式 -o 混淆插件
 ```
+
+用 -h 查看所有参数。
 
 ####通过配置文件运行####
 
