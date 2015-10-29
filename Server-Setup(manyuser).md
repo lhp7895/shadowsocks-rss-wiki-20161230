@@ -52,7 +52,7 @@ MYSQL_DB = 'shadowsocks'  //数据库名
   t                  //最后使用的时间
   u                  //已上传流量
   d                  //已下载流量
-  transfer_enable    //可用流量
+  transfer_enable    //可用流量（总量）
   port               //ss端口
   switch             //保留字段
   enable             //启用或禁用ss帐号（1启用，0禁用）
