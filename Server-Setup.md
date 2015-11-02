@@ -95,31 +95,40 @@ local_port |	local port                      | 本地端口
 password |	password used for encryption    | 密码
 timeout |	in seconds                      | 超时时间
 method |	default: "aes-256-cfb", see Encryption | 加密方式
-obfs   |      default："http_simple"     | 混淆插件，默认"http_simple"
+protocol |      default："origin"     | 协议插件，默认"origin"
+obfs   |      default："http_simple_compatible"     | 混淆插件，默认"http_simple_compatible"
 fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
+
+其中protocol有如下四种取值：
+
+protocol| 说明
+-------|----------
+"origin"|原版协议
+"verify_simple"|带校验的协议
+"verify_deflate"|带压缩的协议
+"auth_simple"|带验证抗重放攻击的协议
 
 其中obfs有如下四种取值：
 
 obfs   | 说明
 -------|----------
 "plain"|不混淆
-"http_simple"|混淆
-"tls_simple"|混淆
-"random_head"|混淆
-"verify_simple"|混淆
-"verify_deflate"|混淆
+"http_simple"|伪装为http协议
+"tls_simple"|伪装为tls协议
+"random_head"|发送一个随机包再通讯的协议
 
 各混淆插件的说明请点击这里查看：[混淆插件说明]
 
-注：客户端的obfs配置必须与服务端的一致。
+注：客户端的protocol和obfs配置必须与服务端的一致。
 
 
-一般情况下，只需要修改以下四项即可：
+一般情况下，只需要修改以下五项即可：
 ```
 "server_port":8388,        //端口
 "password":"password",     //密码
-"obfs":"http_simple",     //混淆插件
+"protocol":"origin",       //协议插件
+"obfs":"http_simple",      //混淆插件
 "method":"aes-256-cfb",    //加密方式
 ```
 
@@ -160,8 +169,8 @@ obfs   | 说明
     "local_address":"127.0.0.1",
     "local_port":1080,
     "port_password":{
-        "8388":["password1","http_simple"],
-        "8389":["password2","random_head"]
+        "8388":{"protocol":"auth_simple", "password":"abcde", "obfs":"http_simple", "obfs_param":""},
+        "8389":{"protocol":"origin", "password":"abcde"}
     },
     "timeout":300,
     "method":"aes-256-cfb",
