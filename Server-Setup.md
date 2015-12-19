@@ -105,6 +105,7 @@ protocol_param |      default：""     | 协议插件参数，默认""
 obfs   |      default："tls1.0_session_auth_compatible"     | 混淆插件，默认"tls1.0_session_auth_compatible"
 obfs_param |      default：""     | 混淆插件参数，默认""
 redirect |      default：""     | 重定向参数，默认""
+dns_ipv6|     default:false  | 是否优先使用IPv6地址，有IPv6时可开启
 fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
 
