@@ -69,15 +69,20 @@ tail -f /var/log/shadowsocks.log
 写入以下内容：
 ```javascript
 {
-    "server":"0.0.0.0",
+    "server": "0.0.0.0",
     "server_ipv6": "::",
-    "server_port":8388,
+    "server_port": 8388,
     "local_address": "127.0.0.1",
-    "local_port":1080,
-    "password":"mypassword",
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "obfs":"http_simple",
+    "local_port": 1080,
+    "password": "mypassword",
+    "timeout": 120,
+    "method": "aes-256-cfb",
+    "protocol": "auth_sha1_compatible",
+    "protocol_param": "",
+    "obfs": "tls1.0_session_auth_compatible",
+    "obfs_param": "",
+    "redirect": "",
+    "dns_ipv6": false,
     "fast_open": false,
     "workers": 1
 }
