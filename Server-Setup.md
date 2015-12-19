@@ -45,7 +45,7 @@ cd shadowsocks/shadowsocks
 ```
 python server.py -p 443 -k password -m aes-256-cfb -o http_simple
 
-#说明：-p 端口 -k 密码  -m 加密方式 -o 混淆插件
+#说明：-p 端口 -k 密码  -m 加密方式 -P 协议插件 -o 混淆插件
 ```
 如果要后台运行：
 ```
@@ -96,27 +96,33 @@ password |	password used for encryption    | 密码
 timeout |	in seconds                      | 超时时间
 method |	default: "aes-256-cfb", see Encryption | 加密方式
 protocol |      default："origin"     | 协议插件，默认"origin"
-obfs   |      default："http_simple_compatible"     | 混淆插件，默认"http_simple_compatible"
+protocol_param |      default：""     | 协议插件参数，默认""
+obfs   |      default："tls1.0_session_auth_compatible"     | 混淆插件，默认"tls1.0_session_auth_compatible"
+obfs_param |      default：""     | 混淆插件参数，默认""
+redirect |      default：""     | 重定向参数，默认""
 fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
 
-其中protocol有如下四种取值：
+其中protocol有如下取值：
 
 protocol| 说明
 -------|----------
 "origin"|原版协议
 "verify_simple"|带校验的协议
 "verify_deflate"|带压缩的协议
-"auth_simple"|带验证抗重放攻击的协议
+"verify_sha1"|带验证抗CCA攻击的协议
+"auth_simple"|抗重放攻击的协议
+"auth_sha1"|带验证抗CCA攻击且抗重放攻击的协议
 
-其中obfs有如下四种取值：
+其中obfs有如下取值：
 
 obfs   | 说明
 -------|----------
 "plain"|不混淆
 "http_simple"|伪装为http协议
-"tls_simple"|伪装为tls协议
+"tls_simple"|伪装为tls协议（不建议使用）
 "random_head"|发送一个随机包再通讯的协议
+"tls1.0_session_auth"|伪装为tls session握手协议，同时能抗重放攻击
 
 各混淆插件的说明请点击这里查看：[混淆插件说明]
 
