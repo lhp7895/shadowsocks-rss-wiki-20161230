@@ -41,7 +41,9 @@ MYSQL_TRANSFER_MUL = 1.0  //流量系数，设置为2.0的话用1M算为2M
 ```
 文件config.json： 
 ```
-"method":"aes-256-cfb",    //修改成您要的加密方式的名称
+"method":"aes-256-cfb",                   //修改成您要的加密方式的名称
+"protocol": "auth_sha1_compatible",       //修改成您要的协议插件名称
+"obfs": "tls1.0_session_auth_compatible", //修改成您要的混淆插件名称
 ```
 
 数据库字段说明:
