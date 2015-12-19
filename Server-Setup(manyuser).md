@@ -39,7 +39,7 @@ MYSQL_PASS = 'ss'         //mysql密码
 MYSQL_DB = 'shadowsocks'  //数据库名
 MYSQL_TRANSFER_MUL = 1.0  //流量系数，设置为2.0的话用1M算为2M
 ```
-文件config.json： 
+文件config.json复制一份到user-config.json，然后编辑： 
 ```
 "method":"aes-256-cfb",                   //修改成您要的加密方式的名称
 "protocol": "auth_sha1_compatible",       //修改成您要的协议插件名称
