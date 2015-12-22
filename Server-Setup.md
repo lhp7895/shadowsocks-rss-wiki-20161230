@@ -117,7 +117,7 @@ protocol| 说明
 "origin"|原版协议
 "verify_simple"|带校验的协议
 "verify_deflate"|带压缩的协议
-"verify_sha1"|带验证抗CCA攻击的协议
+"verify_sha1"|带验证抗CCA攻击的协议，可兼容libev的OTA
 "auth_simple"|抗重放攻击的协议
 "auth_sha1"|带验证抗CCA攻击且抗重放攻击的协议
 
