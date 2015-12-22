@@ -14,15 +14,16 @@ ubuntu/debian：
  
     apt-get install m2crypto git
 
-如果要使用 salsa20 和 chacha20 算法，请安装 [libsodium](https://github.com/jedisct1/libsodium) :
+如果要使用 salsa20 或 chacha20 或 chacha20-ietf 算法，请安装 [libsodium](https://github.com/jedisct1/libsodium) :
 
 ```
 apt-get install build-essential
-wget https://github.com/jedisct1/libsodium/releases/download/1.0.1/libsodium-1.0.1.tar.gz
-tar xf libsodium-1.0.1.tar.gz && cd libsodium-1.0.1
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.7/libsodium-1.0.7.tar.gz
+tar xf libsodium-1.0.7.tar.gz && cd libsodium-1.0.7
 ./configure && make -j2 && make install
 ldconfig
 ```
+如果曾经安装过旧版本，亦可重复用以上步骤更新到最新版，仅1.0.4或以上版本支持chacha20-ietf
 
 获取源代码
 -----
