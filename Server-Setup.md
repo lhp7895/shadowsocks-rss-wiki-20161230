@@ -169,7 +169,12 @@ dns_ipv6参数说明：
     },
     "timeout":300,
     "method":"aes-256-cfb",
-    "obfs":"http_simple",
+    "protocol": "auth_sha1_compatible",
+    "protocol_param": "",
+    "obfs": "tls1.0_session_auth_compatible",
+    "obfs_param": "",
+    "redirect": "",
+    "dns_ipv6": false,
     "fast_open": false,
     "workers": 1
 }
@@ -196,6 +201,12 @@ dns_ipv6参数说明：
     },
     "timeout":300,
     "method":"aes-256-cfb",
+    "protocol": "auth_sha1_compatible",
+    "protocol_param": "",
+    "obfs": "tls1.0_session_auth_compatible",
+    "obfs_param": "",
+    "redirect": "",
+    "dns_ipv6": false,
     "fast_open": false,
     "workers": 1
 }
