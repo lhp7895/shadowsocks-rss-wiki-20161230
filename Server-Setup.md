@@ -138,7 +138,7 @@ obfs   | 说明
 redirect参数说明：
 
 值为空字符串或一个列表，若为列表示例如  
-redirect:["bing.com", "cloudflare.com:443"],  
+"redirect":["bing.com", "cloudflare.com:443"],  
 作用是在连接方的数据不正确的时候，把数据重定向到列表中的其中一个地址和端口（不写端口则视为80），以伪装为目标服务器。
 
 dns_ipv6参数说明：
