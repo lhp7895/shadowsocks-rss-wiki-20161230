@@ -4,6 +4,8 @@
 
 用于方便地产生各种协议接口。实现为在原来的协议外套一层编码和解码接口，不但可以伪装成其它协议流量，还可以把原协议转换为其它协议进行兼容或完善（但目前接口功能还没有写完，目前还在测试完善中），需要服务端与客户端配置相同的协议插件。插件共分为三类，包括原始协议插件，混淆插件，协议定义插件。
 
+## 现有插件介绍 ##
+
 #### 1.原始协议插件 ####
 `origin`或`plain`：表示不混淆，使用原协议
 
@@ -29,7 +31,9 @@
 
 `auth_sha1`：对首个包进行SHA-1校验，同时会发送由客户端生成的随机客户端id(4byte)、连接id(4byte)、unix时间戳(4byte)，之后的通讯使用Adler-32作为效验码。此插件提供了能抵抗CCA的认证，也能抵抗一般的重放攻击，默认同一端口最多支持64个客户端同时使用，可通过修改此值限制客户端数量，使用此插件的服务器与客户机的UTC时间差不能超过1小时，通常只需要客户机校对本地时间并正确设置时区就可以了。此插件与原协议握手延迟相同，能兼容原协议（需要在服务端配置为`auth_sha1_compatible`)，支持服务端自定义参数，参数为10进制整数，表示最大客户端同时使用数。
 
-这样以来，将来只要简单的换一个混淆插件，让大家的特征各不相同，GFW就极难下手统一封锁了。推荐使用`auth_sha1`插件，安全性在以上插件里最高，同时如果要发布公开代理，两个auth插件可严格限制使用人数（要注意的是服务端若配置为`auth_sha1_compatible`则没有限制效果）。
+`auth_sha1_v2`：与`auth_sha1`相似，去除时间验证，以避免部分设备由于时间导致无法连接的问题，增长客户端ID为8字节，使用更大的长度混淆。能兼容原协议（需要在服务端配置为`auth_sha1_v2_compatible`)，支持服务端自定义参数，参数为10进制整数，表示最大客户端同时使用数。
+
+这样以来，将来只要简单的换一个混淆插件，让大家的特征各不相同，GFW就极难下手统一封锁了。推荐使用`auth_sha1`插件，安全性在以上插件里最高，同时如果要发布公开代理，以上auth插件均可严格限制使用人数（要注意的是服务端若配置为`compatible`，那么用户只要使用原协议就没有限制效果）。
 
 #### 协议特性 ####
 
@@ -37,19 +41,24 @@
 
 | name           | encode speed | bandwidth | anti CPA | anti CCA | anti replay attack | anti packet length analysis | anti packet time sequence analysis |
 | -------------- | ----: | :-------: | :------: | :------: | :---------------: | :-------------------: | :-----------------: |
-| origin         | 100%  |    100%   |    Yes   |    No    |        No         |            0          |          0          |
+| origin         | 100%  |     99%   |    Yes   |    No    |        No         |            0          |          0          |
 | verify_simple  |  99%  |     96%   |    Yes   |    No    |        No         |            1          |          0          |
-| verify_deflate |  96%  |  97%~200% |    Yes   |    No    |        No         |            3          |          0          |
-| verify_sha1    |  98%  |  96%/100% |    Yes   |    Yes   |        No         |            0          |          0          |
-| auth_simple    |  99%  |     96%   |    Yes   |    No    |        Yes        |            1          |          0          |
-| auth_sha1      |  99%  |     96%   |    Yes   |    Yes   |        Yes        |            2          |          0          |
+| verify_deflate |  96%  |  97%~110% |    Yes   |    No    |        No         |            6          |          0          |
+| verify_sha1    |  98%  |   94%/99% |    Yes   |    Yes   |        No         |            0          |          0          |
+| auth_simple    |  99%  |     95%   |    Yes   |    No    |        Yes        |            1          |          0          |
+| auth_sha1      |  99%  |     90%   |    Yes   |    Yes   |        Yes        |            4          |          0          |
+| auth_sha1_v2   |  99%  |     70%   |    Yes   |    Yes   |        Yes        |           10          |          0          |
 
 说明：  
 
+-  以上为浏览普通网页（非下载非看视频）的平均测试结果，浏览不同的网页会有不同的偏差
 -  encode speed仅用于提供相对速度的参考，不同环境下代码执行速度不同
--  verify_deflate的bandwidth（有效带宽）上限200%仅为估值，若数据经过压缩或加密，那么压缩效果会很差
--  verify_sha1的bandwidth意为上传平均有效带宽96%，下载100%
--  对于抗包长度分析一列，满分为100，即0为完全无效果，1~3为效果轻微，事实上这个难度很大，可参阅方叫兽等人论文
+-  verify_deflate的bandwidth（有效带宽）上限110%仅为估值，若数据经过压缩或加密，那么压缩效果会很差
+-  verify_sha1的bandwidth意为上传平均有效带宽96%，下载99%
+-  auth\_sha1\_v2的bandwidth在浏览普通网页时较低（为了较强的长度混淆，但单个数据包尺寸会保持在1500以内），而看视频或下载时比auth_sha1要高，可达98%，所以不用担心大流量下载时的速度
+-  如果同时使用了其它的混淆插件，会令bandwidth的值降低，具体由所使用的混淆插件及所浏览的网页共同决定
+-  对于抗包长度分析一列，满分为100，即0为完全无效果，5以下为效果轻微，具体分析方法可参阅方叫兽等人论文
+-  对于抗包时序分析一列，方某人的论文表示虽然可利用，但利用难度大（也即他们还没能达到实用级），目前对此也不做处理
 -  在现阶段，功夫网的重放攻击(Replay attack)十分常见，建议使用能抗重放攻击的协议。
 
 #### 配置方法 ####
@@ -63,6 +72,8 @@ user-config.json或config.json里有一个protocol的字段，目前的可能取
 `auth_simple`  
 `auth_sha1`  
 `auth_sha1_compatible`  
+`auth_sha1_v2`  
+`auth_sha1_v2_compatible`  
 config.json里有一个obfs的字段，目前的可能取值为：  
 `plain`  
 `http_simple`  
@@ -84,4 +95,110 @@ config.json里有一个obfs的字段，目前的可能取值为：
 
 客户端配置：使用本ssr版本，在编辑服务器配置里找到相应节点，最后在protocol选项和obfs选项的列表里选择需要使用的插件，然后填写相应的参数即可  
 
-兼容性：目前ssr-libev客户端仅支持`verify_simple`, `auth_simple`, `auth_sha1`协议，及`http_simple`混淆。其余的ssr-python及ssr-c#支持全部的协议和混淆。
+兼容性：目前ssr-libev客户端仅支持`verify_simple`, `auth_simple`, `auth_sha1`, `auth_sha1_v2`协议，及`http_simple`, `tls1.0_session_auth`混淆。其余的ssr-python及ssr-c#支持全部的协议和混淆。
+
+## 实现接口 ##
+以下以C#语言为例做说明
+
+interface IObfs
+
+成员函数
+
+`InitData()`  
+参数：无  
+返回：一个自定义类型变量，通常用于保存此接口的全局信息，不应返回null，c语言中返回void*  
+说明：第一次创建实例前调用，同一服务端配置不会重复调用，服务端在建立监听时调用，客户端在第一次连接时调用。  
+
+`SetServerInfo(ServerInfo serverInfo)`  
+参数：ServerInfo结构，包含成员变量：  
+
+- host: 字符串类型，服务端ip，客户端需要把域名转换为ip，如有前置代理，则直接使用配置时所用的域名也可，服务端需要获取监听ip
+- port: 整数类型，服务端监听端口
+- param: 用户设置的参数，字符串类型
+- data: 由InitData返回的结果，为object类型（c语言中使用void*）
+- iv: 客户端或服务端加密时使用的iv数组（c语言中需要添加额外字段以记录其长度，下同）
+- recv_iv: 客户端或服务端接收到的iv数组
+- key: 加密时使用的key（不是原key，是通过BytesToKey生成的指定长度数组）
+- tcp_mss: 整数类型，TCP分包大小，设置为1440
+
+返回：无  
+说明：实例构造的时候（每个连接建立时）调用，调用前iv和key必须已经初始化；而接收到数据后先初始化recv_iv再调用插件。  
+
+`Dispose()`  
+参数：无  
+返回：无  
+说明：实例析构时（每个连接关闭时）调用
+
+`byte[] ClientPreEncrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：客户端发送到服务端数据**加密前**调用此接口
+
+`byte[] ClientEncode(byte[] encryptdata, int datalength, out int outlength)`  
+参数：需要编码的字节数组及其长度  
+返回：编码后的字节数组及其长度  
+说明：客户端发送到服务端数据**加密后**调用此接口
+
+`byte[] ClientDecode(byte[] encryptdata, int datalength, out int outlength, out bool needsendback)`  
+参数：需要解码的字节数组及其长度  
+返回：解码后的字节数组及其长度，以及needsendback标记是否立即回发服务端数据。如needsendback为true，则会立即调用ClientEncode，调用时参数是一个长度为0的字节数组  
+说明：客户端收到服务端数据在**解密前**调用此接口
+
+`byte[] ClientPostDecrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：客户端收到服务端数据在**解密后**调用此接口
+
+`byte[] ServerPreEncrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：服务端发送到客户端数据**加密前**调用此接口
+
+`byte[] ServerEncode(byte[] encryptdata, int datalength, out int outlength)`  
+参数：需要编码的字节数组及其长度  
+返回：编码后的字节数组及其长度  
+说明：服务端发送到客户端数据**加密后**调用此接口
+
+`byte[] ServerDecode(byte[] encryptdata, int datalength, out int outlength, out bool needdecrypt, out bool needsendback)`  
+参数：需要解码的字节数组及其长度  
+返回：解码后的字节数组及其长度，以及needdecrypt标记数据是否需要解密（一般都应该为true），以及needsendback标记是否立即回发客户端数据。如needsendback为true，则会立即调用ServerEncode并发送其返回结果，调用时参数是一个长度为0的字节数组  
+说明：服务端收到客户端数据在**解密前**调用此接口
+
+`byte[] ServerPostDecrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：服务端收到客户端数据在**解密后**调用此接口
+
+`byte[] ClientUdpPreEncrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：客户端发送到服务端UDP数据**加密前**调用此接口
+
+`byte[] ClientUdpPostDecrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：客户端收到服务端UDP数据在**解密后**调用此接口
+
+`byte[] ServerUdpPreEncrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：服务端发送到客户端UDP数据**加密前**调用此接口
+
+`byte[] ServerUdpPostDecrypt(byte[] plaindata, int datalength, out int outlength)`  
+参数：需要处理的字节数组及其长度  
+返回：处理后的字节数组及其长度  
+说明：服务端收到客户端UDP数据在**解密后**调用此接口
+
+### 插件编写 ###
+
+有两类插件，一类是协议插件，一类是混淆插件
+
+其中接口InitData, SetServerInfo, Dispose接口必须实现，其它的接口为通讯接口
+
+编写协议插件的话，需要重写ClientPreEncrypt, ClientPostDecrypt, ServerPreEncrypt, ServerPostDecrypt，其它的按原样返回，needdecrypt必须为true，needsendback必须为false
+
+编写混淆插件的话，需要重写ClientEncode, ClientDecode, ServerEncode, ServerDecode，其它的按原样返回。
+
+如果编写的部分仅含客户端部分，那么只需要编写Client为前缀的两个接口，服务端同理。
+
+目前支持此插件接口的，有 [ShadowsocksR C#](https://github.com/breakwa11/shadowsocks-csharp/releases) 和 [ShadowsocksR Python](https://github.com/breakwa11/shadowsocks/tree/manyuser)
