@@ -257,12 +257,121 @@ tail -f /var/log/shadowsocks.log
 服务器搭建
 --------
 
-建议选择 Ubuntu 14.04 LTS 作为服务器以便使用 [TCP Fast Open]。除非有明确理由，不建议用对新手不友好的 CentOS。
+建议选择 Ubuntu 14.04 LTS 作为服务器以便使用 [TCP Fast Open]。
+
+除非有明确理由，不建议用对新手不友好的 CentOS，如果你是rpm系的死忠，建议使用Fedora。
 
 为了更好的性能，VPS 尽量选择 XEN 或 KVM，不要使用 OpenVZ。推荐使用以下 VPS：
 
 - [Digital Ocean] 自带的内核无需自己编译模块即可使用 [hybla] 算法
 - [Linode] 功能强大，机房较多
+
+启动脚本
+------
+以下启动脚本均假定shadowsocks-rss安装于/usr/local目录，配置文件为/etc/shadowsocks.json，请按照实际情况自行修改
+
+SysVinit启动脚本，适合CentOS/RHEL6系以及Ubuntu 14.x，Debian7.x
+```
+#!/bin/sh
+# chkconfig: 2345 90 10
+# description: Start or stop the Shadowsocks R server
+#
+### BEGIN INIT INFO
+# Provides: Shadowsocks-R
+# Required-Start: $network $syslog
+# Required-Stop: $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: Start or stop the Shadowsocks R server
+### END INIT INFO
+
+# Author: Yvonne Lu(Min) <min@utbhost.com>
+
+name=shadowsocks
+PY=/usr/bin/python
+SS=/usr/local/shadowsocks/server.py
+SSPY=server.py
+conf=/etc/shadowsocks.json
+
+start(){
+    $PY $SS -c $conf -d start
+    RETVAL=$?
+    if [ "$RETVAL" = "0" ]; then
+        echo "$name start success"
+    else
+        echo "$name start failed"
+    fi
+}
+
+stop(){
+    pid=`ps -ef | grep -v grep | grep -v ps | grep -i "${SSPY}" | awk '{print $2}'`
+    if [ ! -z $pid ]; then
+        $PY $SS -c $conf -d stop
+        RETVAL=$?
+        if [ "$RETVAL" = "0" ]; then
+            echo "$name stop success"
+        else
+            echo "$name stop failed"
+        fi
+    else
+        echo "$name is not running"
+        RETVAL=1
+    fi
+}
+
+status(){
+    pid=`ps -ef | grep -v grep | grep -v ps | grep -i "${SSPY}" | awk '{print $2}'`
+    if [ -z $pid ]; then
+        echo "$name is not running"
+        RETVAL=1
+    else
+        echo "$name is running with PID $pid"
+        RETVAL=0
+    fi
+}
+
+case "$1" in
+'start')
+    start
+    ;;
+'stop')
+    stop
+    ;;
+'status')
+    status
+    ;;
+'restart')
+    stop
+    start
+    RETVAL=$?
+    ;;
+*)
+    echo "Usage: $0 { start | stop | restart | status }"
+    RETVAL=1
+    ;;
+esac
+exit $RETVAL
+```
+请将上述脚本保存为/etc/init.d/shadowsocks
+并执行`chmod 755 /etc/init.d/shadowsocks && chkconfig --add shadowsocks && service shadowsocks start`  
+
+systemd脚本，适用于CentOS/RHEL7以上，Ubuntu 15以上，Debian8以上
+
+```
+[Unit]
+Description=Start or stop the Shadowsocks R server
+After=network.target
+Wants=network.target
+[Service]
+Type=forking
+PIDFile=/var/run/shadowsocks.pid
+ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d start
+ExecStop=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d stop
+[Install]
+WantedBy=multi-user.target
+```
+请将上述脚本保存为/etc/systemd/system/shadowsocks.service
+并执行`systemctl enable shadowsocks.service && systemctl start shadowsocks.service`
 
 客户端
 ------
@@ -317,7 +426,9 @@ tail -f /var/log/shadowsocks.log
 [Troubleshooting]:   https://github.com/shadowsocks/shadowsocks/wiki/Troubleshooting
 [Wiki]:              https://github.com/shadowsocks/shadowsocks/wiki
 [Windows]:           https://github.com/breakwa11/shadowsocks-csharp
+[Dediserve]:         https://manage.dediserve.com/?affid=354
+[Hosthatch]:         https://portal.hosthatch.com/aff.php?aff=283
 [Digital Ocean]:     https://www.digitalocean.com/?refcode=b1cddd149721
 [Linode]:            https://www.linode.com/?r=e7932c8b03f9abc8aab71663b90b689a676402d1
 [hybla]:             https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks
-[Bandwagon Host]:    https://bandwagonhost.com/aff.php?pid=19
+[Bandwagon Host]:    https://bandwagonhost.com/aff.php?pid=6908
