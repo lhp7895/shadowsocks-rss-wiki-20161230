@@ -261,10 +261,12 @@ tail -f /var/log/shadowsocks.log
 
 除非有明确理由，不建议用对新手不友好的 CentOS，如果你是rpm系的死忠，建议使用Fedora。
 
-为了更好的性能，VPS 尽量选择 XEN 或 KVM，不要使用 OpenVZ。推荐使用以下 VPS：
+为了更好的性能，VPS 尽量选择 XEN 或 KVM，不建议使用 OpenVZ。推荐使用以下 VPS：
 
 - [Digital Ocean] 自带的内核无需自己编译模块即可使用 [hybla] 算法
 - [Linode] 功能强大，机房较多
+- [Vultr] 价格实惠，机房较多，经常有赠送
+- [Dediserve] 主机稳定，机房众多，美中不足的是国内线路不是特别好
 
 启动脚本
 ------
@@ -352,7 +354,7 @@ case "$1" in
 esac
 exit $RETVAL
 ```
-请将上述脚本保存为/etc/init.d/shadowsocks
+请将上述脚本保存为/etc/init.d/shadowsocks     
 并执行`chmod 755 /etc/init.d/shadowsocks && chkconfig --add shadowsocks && service shadowsocks start`  
 
 systemd脚本，适用于CentOS/RHEL7以上，Ubuntu 15以上，Debian8以上
@@ -370,7 +372,7 @@ ExecStop=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/sh
 [Install]
 WantedBy=multi-user.target
 ```
-请将上述脚本保存为/etc/systemd/system/shadowsocks.service
+请将上述脚本保存为/etc/systemd/system/shadowsocks.service     
 并执行`systemctl enable shadowsocks.service && systemctl start shadowsocks.service`
 
 客户端
@@ -427,7 +429,7 @@ WantedBy=multi-user.target
 [Wiki]:              https://github.com/shadowsocks/shadowsocks/wiki
 [Windows]:           https://github.com/breakwa11/shadowsocks-csharp
 [Dediserve]:         https://manage.dediserve.com/?affid=354
-[Hosthatch]:         https://portal.hosthatch.com/aff.php?aff=283
+[Vultr]:             http://www.vultr.com/?ref=6822492
 [Digital Ocean]:     https://www.digitalocean.com/?refcode=b1cddd149721
 [Linode]:            https://www.linode.com/?r=e7932c8b03f9abc8aab71663b90b689a676402d1
 [hybla]:             https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks
