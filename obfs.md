@@ -16,7 +16,9 @@
 
 `random_head`：开始通讯前发送一个几乎为随机的数据包（目前末尾4字节为CRC32，会成为特征，以后会改进），之后为原协议流。目标是让首个数据包根本不存在任何有效信息，让统计学习机制见鬼去吧。此插件可以兼容原协议(需要在服务端配置为`random_head_compatible`)，比原协议多一次握手导致连接时间会长一些，除了握手过程之后没有冗余数据包，不支持自定义参数。  
 
-`tls1.0_session_auth`:模拟TLS1.0在客户端有session ID的情况下的握手连接。目前为完整模拟实现，因为有session ID所以没有发送证书等复杂步骤，因而防火墙无法根据证书做判断。同时自带一定的抗重放攻击的能力。如遇到重放攻击则会在服务端log里搜索到，可以通过`grep "replay attack"`搜索，可以用此插件发现你所在地区线路有没有针对TLS的干扰。防火墙对TLS比较无能为力，抗封锁能力应该会较其它插件强，但遇到的干扰也可能不少，不过协议本身会检查出任何干扰，遇到干扰便断开连接，避免长时间等待，让客户端或浏览器自行重连。在支持本插件的情况下建议不要使用`tls_simple`。此插件可以兼容原协议(需要在服务端配置为`tls1.0_session_auth_compatible`)，比原协议多一次握手导致连接时间会长一些，除了握手过程之后没有冗余数据包，不支持自定义参数，使用C#客户端开启自动重连时比其它插件表现更好。
+`tls1.0_session_auth`（不建议使用）:模拟TLS1.0在客户端有session ID的情况下的握手连接。但实现有错误，已观察到有可能是防火墙的封锁。此插件可以兼容原协议(需要在服务端配置为`tls1.0_session_auth_compatible`)，比原协议多一次握手导致连接时间会长一些，除了握手过程之后没有冗余数据包，不支持自定义参数。
+
+`tls1.2_ticket_auth`（强烈推荐）:模拟TLS1.2在客户端有session ticket的情况下的握手连接。目前为完整模拟实现，经抓包软件测试完美伪装为TLS1.2。因为有ticket所以没有发送证书等复杂步骤，因而防火墙无法根据证书做判断。同时自带一定的抗重放攻击的能力。如遇到重放攻击则会在服务端log里搜索到，可以通过`grep "replay attack"`搜索，可以用此插件发现你所在地区线路有没有针对TLS的干扰。防火墙对TLS比较无能为力，抗封锁能力应该会较其它插件强，但遇到的干扰也可能不少，不过协议本身会检查出任何干扰，遇到干扰便断开连接，避免长时间等待，让客户端或浏览器自行重连。此插件可以兼容原协议(需要在服务端配置为`tls1.2_ticket_auth_compatible`)，比原协议多一次握手导致连接时间会长一些，使用C#客户端开启自动重连时比其它插件表现更好。**支持自定义参数，参数为SNI，即发送host名称的字段**，此功能与TOR的meet插件十分相似，例如设置为`cloudfront.net`伪装为云服务器请求，可以使用逗号分割多个host如`a.com,b.net,c.org`（仅C#版支持），这时会随机使用。注意，错误设置此参数可能导致连接被断开甚至IP被封锁，如不清楚如何设置那么请留空。推荐自定义参数设置为`cloudflare.com`或`cloudfront.net`。
 
 #### 3.协议定义插件 ####
 此类型的插件实质上用于定义加密前的协议，部分插件能兼容原协议。
@@ -83,10 +85,12 @@ config.json里有一个obfs的字段，目前的可能取值为：
 `random_head`  
 `random_head_compatible`  
 `tls1.0_session_auth`  
-`tls1.0_session_auth_compatible`  
+`tls1.0_session_auth_compatible`     
+`tls1.2_ticket_auth`    
+`tls1.2_ticket_auth_compatible`     
 默认为  
 `"protocol":"auth_sha1_compatible",`  
-`"obfs":"tls1.0_session_auth_compatible",`  
+`"obfs":"tls1.2_ticket_auth_compatible",`  
 相应的  
 协议插件参数默认为`"protocol_param":""`  
 混淆插件参数默认为`"obfs_param":""`  
