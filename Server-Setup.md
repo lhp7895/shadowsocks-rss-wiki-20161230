@@ -94,7 +94,7 @@ tail -f /var/log/shadowsocks.log
     "method": "aes-256-cfb",
     "protocol": "auth_sha1_compatible",
     "protocol_param": "",
-    "obfs": "tls1.0_session_auth_compatible",
+    "obfs": "tls1.2_ticket_auth_compatible",
     "obfs_param": "",
     "redirect": "",
     "dns_ipv6": false,
@@ -117,7 +117,7 @@ timeout |	in seconds                      | 超时时间
 method |	default: "aes-256-cfb", see Encryption | 加密方式
 protocol |      default："origin"     | 协议插件，默认"origin"
 protocol_param |      default：""     | 协议插件参数，默认""
-obfs   |      default："http_simple_compatible"     | 混淆插件，默认"http_simple_compatible"
+obfs   |      default："tls1.2_ticket_auth_compatible"     | 混淆插件，默认"tls1.2_ticket_auth_compatible"
 obfs_param |      default：""     | 混淆插件参数，默认""
 redirect |      default：""     | 重定向参数，默认""
 dns_ipv6|     default:false  | 是否优先使用IPv6地址，有IPv6时可开启
@@ -144,7 +144,7 @@ obfs   | 说明
 "tls_simple"|伪装为tls协议（不建议使用）
 "random_head"|发送一个随机包再通讯的协议
 "tls1.0_session_auth"|伪装为tls session握手协议（不建议使用），同时能抗重放攻击
-"tls1.2_ticket_auth"|伪装为tls ticket握手协议，同时能抗重放攻击
+"tls1.2_ticket_auth"|伪装为tls ticket握手协议（强烈推荐），同时能抗重放攻击
 
 各混淆插件的说明请点击这里查看：[混淆插件说明]
 
