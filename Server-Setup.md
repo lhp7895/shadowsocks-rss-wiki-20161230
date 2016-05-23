@@ -356,7 +356,15 @@ esac
 exit $RETVAL
 ```
 请将上述脚本保存为/etc/init.d/shadowsocks     
-并执行`chmod 755 /etc/init.d/shadowsocks && chkconfig --add shadowsocks && service shadowsocks start`  
+CentOS/RHEL6 执行:
+```
+chmod 755 /etc/init.d/shadowsocks && chkconfig --add shadowsocks && service shadowsocks start
+```
+Ubuntu 14.x，Debian7.x 执行:
+```
+chmod 755 /etc/init.d/shadowsocks ; update-rc.d shadowsocks defaults ; service shadowsocks start
+```
+
 
 systemd脚本，适用于CentOS/RHEL7以上，Ubuntu 15以上，Debian8以上
 
