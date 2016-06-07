@@ -30,15 +30,18 @@ apt-get install m2crypto git
 
 
 ### 服务端配置 ###
-shadowsocks目录内，文件Config.py： 
+shadowsocks目录内，文件Config.py或apiconfig.py： 
 ```
+TRANSFER_MUL = 1.0  //流量系数，设置为2.0的话用1M算为2M
+
 MYSQL_HOST = 'localhost'  //前端mysql域名/IP
 MYSQL_PORT = 3306         //mysql端口
 MYSQL_USER = 'ss'         //mysql用户名(建议不要用Root账户)
 MYSQL_PASS = 'ss'         //mysql密码
 MYSQL_DB = 'shadowsocks'  //数据库名
-MYSQL_TRANSFER_MUL = 1.0  //流量系数，设置为2.0的话用1M算为2M
 ```
+如果是新版本，把apiconfig.py复制为userapiconfig.py后，对apiconfig.py里以上内容进行相应修改
+
 文件config.json复制一份到user-config.json，然后编辑： 
 ```
 "method":"aes-256-cfb",                   //修改成您要的加密方式的名称
@@ -112,29 +115,24 @@ MYSQL_TRANSFER_MUL = 1.0  //流量系数，设置为2.0的话用1M算为2M
 ### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
 
-如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，执行 
+如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，发现进程不存在，那么可能是达到了系统的最大连接数 
 
-`netstat -ltnap | grep -c CLOSE_WAIT` 
+如果是ubuntu/centos均可修改`/etc/sysctl.conf`
 
-显示的数值很大（超过50是严重不正常），那么请修改服务器的最大连接数，如果是ubuntu/centos均可修改 
+找到`fs.file-max`这一行，修改其值为1024000，并保存退出。然后执行`sysctl -p`使其生效
 
-`/etc/security/limits.conf` 
+打开文件`/etc/security/limits.conf`
 
 添加两行： 
 ```
-*               soft    nofile           32768
-*               hard    nofile           131072
+*               soft    nofile           512000
+*               hard    nofile          1024000
 ```
-然后重启机器生效
+保存后，重启操作系统生效
 
-如果还是出现大量的too many open files错误，可以通过执行以下命令确定占用大量文件数的进程：
-
-`lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more`
-
-
-
-
-
-
+针对ubuntu系统，你还需要额外的在运行前使用ulimit命令设置最大文件数，可使用附带的运行脚本。  
+如果使用supervisor进程守护，需要修改文件`/etc/default/supervisor`，添加一行：  
+`ulimit -n 512000`  
+再启动你的服务
 
 [ss-panel]:            https://github.com/orvice/ss-panel
