@@ -40,7 +40,7 @@ MYSQL_USER = 'ss'         //mysql用户名(建议不要用Root账户)
 MYSQL_PASS = 'ss'         //mysql密码
 MYSQL_DB = 'shadowsocks'  //数据库名
 ```
-如果是新版本，把apiconfig.py复制为userapiconfig.py后，对apiconfig.py里以上内容进行相应修改
+如果是新版本，把apiconfig.py复制为userapiconfig.py后，对userapiconfig.py里以上内容进行相应修改，以避免更新时发生冲突
 
 文件config.json复制一份到user-config.json，然后编辑： 
 ```
