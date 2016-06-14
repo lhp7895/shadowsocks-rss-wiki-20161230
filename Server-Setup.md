@@ -134,6 +134,7 @@ protocol| 说明
 "verify_sha1"|带验证抗CCA攻击的协议，可兼容libev的OTA
 "auth_simple"|抗重放攻击的协议
 "auth_sha1"|带验证抗CCA攻击且抗重放攻击的协议
+"auth_sha1_v2"|类似"auth_sha1"，提供更好的长度混淆特性
 
 其中obfs有如下取值：
 
