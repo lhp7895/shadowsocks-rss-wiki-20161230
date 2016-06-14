@@ -6,7 +6,7 @@
 		"testapp" : "123456"
 	},
 ```
-其中key为app name，value为token
+其中key为app name，value为token，可随意修改
 
 使用http get或post访问软件的监听端口，假设为1080，访问入口为
 `http://127.0.0.1:1080/api`
@@ -20,6 +20,8 @@ token: 访问所使用的token
 action: 要执行的操作，值为"statistics"或"config"，分别表示获取统计信息，和读写配置信息
 
 config: 当action为"config"时使用这个参数表示修改配置，值为配置字符串，json格式
+
+配置完成后，使用浏览器访问`http://127.0.0.1:1080/api?action=statistics&app=testapp&token=123456`即可查看统计信息
 
 以下为使用python2修改配置的示例：
 
