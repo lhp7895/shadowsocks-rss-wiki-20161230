@@ -57,3 +57,5 @@ response = urllib2.urlopen(request)
 
 print response.read()
 ```
+
+以上仅为修改示例，省略了其它的配置项（省略的项将会恢复为默认配置）。如果不需要修改节点外的信息，请先通过API获取原配置然后合并
