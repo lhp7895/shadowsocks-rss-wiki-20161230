@@ -32,15 +32,14 @@ data['config'] = """{
 	"configs" : [
 		{
 			"remarks" : "",
-			"server" : "106.185.0.0",
+			"server" : "192.168.0.1",
 			"server_port" : 443,
-			"server_udp_port" : 0,
 			"password" : "password",
 			"method" : "rc4-md5",
 			"obfs" : "tls1.2_ticket_auth",
 			"obfsparam" : "",
 			"remarks_base64" : "",
-			"group" : "",
+			"group" : "test",
 			"udp_over_tcp" : false,
 			"protocol" : "auth_sha1_v2",
 			"enable" : true,
