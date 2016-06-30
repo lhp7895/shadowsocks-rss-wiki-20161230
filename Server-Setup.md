@@ -8,11 +8,11 @@
 
 centos：  
 
-    yum install m2crypto git libsodium
+    yum install git
 
 ubuntu/debian：  
  
-    apt-get install m2crypto git
+    apt-get install git
 
 如果要使用 salsa20 或 chacha20 或 chacha20-ietf 算法，请安装 [libsodium](https://github.com/jedisct1/libsodium) :  
       
