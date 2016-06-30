@@ -8,12 +8,12 @@
 centos： 
 ```
 yum install python-setuptools && easy_install pip
-yum install m2crypto git
+yum install git
 ```
 ubuntu/debian： 
 ```
 apt-get install python-pip
-apt-get install m2crypto git
+apt-get install git
 ```
 ### 安装cymysql ###
 
