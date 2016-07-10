@@ -416,6 +416,9 @@ WantedBy=multi-user.target
 *               soft    nofile           512000
 *               hard    nofile          1024000
 ```
+
+对于centos，还需要在/etc/pam.d/login里，检查有没有`session required /lib/security/pam_limits.so`，如果没有，加上即可
+
 保存后，重启操作系统生效
 
 针对ubuntu系统，你还需要额外的在运行前使用ulimit命令设置最大文件数，可使用附带的运行脚本。  
