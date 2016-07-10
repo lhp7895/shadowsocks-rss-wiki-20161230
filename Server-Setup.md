@@ -81,7 +81,7 @@ tail -f /var/log/shadowsocks.log
 
 建立配置文件，如果你的ss目录是`/root/shadowsocks`  
 `vi /root/shadowsocks/user-config.json`  
-即写于ss的主目录下
+即写于ss的主目录下（或通过执行`cp config.json user-config.json`快速创建一个）
 
 写入以下内容：
 ```javascript
