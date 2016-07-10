@@ -79,7 +79,9 @@ tail -f /var/log/shadowsocks.log
 
 ####通过配置文件运行####
 
-建立配置文件 `vi /etc/shadowsocks.json`
+建立配置文件，如果你的ss目录是`/root/shadowsocks`  
+`vi /root/shadowsocks/user-config.json`  
+即写于ss的主目录下
 
 写入以下内容：
 ```javascript
@@ -232,16 +234,16 @@ dns_ipv6参数说明：
 
 ####运行子目录内的server.py：####
 ```
-python server.py -c /etc/shadowsocks.json
+python server.py
 ```
 
 如果要在后台运行：
 ```
-python server.py -c /etc/shadowsocks.json -d start
+python server.py -d start
 ```
 如果要停止/重启：
 ```
-python server.py -c /etc/shadowsocks.json -d stop/restart
+python server.py -d stop/restart
 ```
 查看日志：
 ```
@@ -371,7 +373,7 @@ systemd脚本，适用于CentOS/RHEL7以上，Ubuntu 15以上，Debian8以上
 
 ```
 [Unit]
-Description=Start or stop the Shadowsocks R server
+Description=Start or stop the ShadowsocksR server
 After=network.target
 Wants=network.target
 [Service]
