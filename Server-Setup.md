@@ -274,7 +274,7 @@ tail -f /var/log/shadowsocks.log
 
 启动脚本
 ------
-以下启动脚本均假定shadowsocks-rss安装于/usr/local目录，配置文件为/etc/shadowsocks.json，请按照实际情况自行修改
+以下启动脚本均假定shadowsocks-rss安装于/usr/local目录，配置文件为/usr/local/user-config.json，请按照实际情况自行修改
 
 SysVinit启动脚本，适合CentOS/RHEL6系以及Ubuntu 14.x，Debian7.x
 ```
@@ -297,7 +297,7 @@ name=shadowsocks
 PY=/usr/bin/python
 SS=/usr/local/shadowsocks/server.py
 SSPY=server.py
-conf=/etc/shadowsocks.json
+conf=/usr/local/shadowsocks/user-config.json
 
 start(){
     $PY $SS -c $conf -d start
