@@ -30,17 +30,29 @@ apt-get install git
 
 
 ### 服务端配置 ###
-shadowsocks目录内，文件Config.py或apiconfig.py： 
+shadowsocks目录内，把apiconfig.py复制为userapiconfig.py后，对userapiconfig.py里以上内容进行相应修改： 
 ```
-TRANSFER_MUL = 1.0  //流量系数，设置为2.0的话用1M算为2M
+API_INTERFACE = 'sspanelv2' //修改接口类型
+```
+根据你的数据库类型，需正确选择使用sspanelv2, sspanelv3, sspanelv3ssr之一
 
-MYSQL_HOST = 'localhost'  //前端mysql域名/IP
-MYSQL_PORT = 3306         //mysql端口
-MYSQL_USER = 'ss'         //mysql用户名(建议不要用Root账户)
-MYSQL_PASS = 'ss'         //mysql密码
-MYSQL_DB = 'shadowsocks'  //数据库名
+然后把mysql.json复制为usermysql.json，并修改里面的内容：
 ```
-如果是新版本，把apiconfig.py复制为userapiconfig.py后，对userapiconfig.py里以上内容进行相应修改，以避免更新时发生冲突
+{
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "ss",
+    "password": "pass",
+    "db": "shadowsocks",
+    "node_id": 1,
+    "transfer_mul": 1.0,
+    "ssl_enable": 0,
+    "ssl_ca": "",
+    "ssl_cert": "",
+    "ssl_key": ""
+}
+```
+以上包括（按次序）：数据库服务器地址，端口，数据库登陆用户名，密码，数据库表，节点ID（sspanelv3支持），流量比率，开启mysql的SSL连接等等
 
 文件config.json复制一份到user-config.json，然后编辑： 
 ```
