@@ -30,12 +30,8 @@ shadowsocks目录内，把apiconfig.py复制为userapiconfig.py后，对userapic
 API_INTERFACE = 'mudbjson' //修改接口类型
 ```
 
-文件config.json复制一份到user-config.json，然后编辑： 
-```
-"method":"aes-256-cfb",                   //修改成您要的加密方式的名称
-"protocol": "auth_sha1_compatible",       //修改成您要的协议插件名称
-"obfs": "tls1.0_session_auth_compatible", //修改成您要的混淆插件名称
-```
+接着，通过使用脚本`mujson_mgr.py`添加端口及相应的加密、协议、混淆等配置，具体方法通过执行以下命令该脚本的提示：  
+`python mujson_mgr.py`
 
 ### 服务端运行与停止 ###
 
