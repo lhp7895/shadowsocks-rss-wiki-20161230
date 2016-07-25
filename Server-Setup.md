@@ -92,14 +92,14 @@ tail -f /var/log/shadowsocks.log
 
 客户端
 ------
-注：以下客户端只有windows客户端和python版客户端可以使用ssr新特性，其他原版客户端只能以兼容的方式连接ssr服务器（目前ssr仍兼容大部分旧版客户端）。
+注：以下客户端只有windows客户端和python版客户端可以使用SSR特性，其他原版客户端只能以兼容的方式连接SSR服务器（SSR可兼容SS客户端）。
 
 * [Windows] / [OS X]
-* [Linux]
+* [Linux python] / [Linux Qt]
 * [Android] / [iOS]
 * [OpenWRT]
 
-在你本地的 PC 或手机上使用图形客户端。具体使用参见它们的使用说明。
+OSX上可使用GoAgentX的SSR插件。在你本地的 PC 或手机上使用图形客户端。具体使用参见它们的使用说明。
 
 也可以直接使用 [Python] 版客户端（命令行）。
 
@@ -110,7 +110,8 @@ tail -f /var/log/shadowsocks.log
 
 
 [Python]:            https://github.com/breakwa11/shadowsocks-rss/wiki/Python-client
-[Linux]:             https://github.com/librehat/shadowsocks-qt5
+[Linux python]:      https://github.com/breakwa11/shadowsocks
+[Linux Qt]:          https://github.com/librehat/shadowsocks-qt5
 [Android]:           https://github.com/shadowsocks/shadowsocks-android
 [Debian sid]:        https://packages.debian.org/unstable/python/shadowsocks
 [iOS]:               https://github.com/shadowsocks/shadowsocks-iOS/wiki/Help
