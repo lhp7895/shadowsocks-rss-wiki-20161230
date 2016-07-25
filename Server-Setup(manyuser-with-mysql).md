@@ -61,24 +61,6 @@ API_INTERFACE = 'sspanelv2' //修改接口类型
 "obfs": "tls1.0_session_auth_compatible", //修改成您要的混淆插件名称
 ```
 
-数据库字段说明:
-```
-  id                 //用户id
-  email              //用户邮箱
-  pass               //用户密码
-  passwd             //ss密码
-  t                  //最后使用的时间
-  u                  //已上传流量
-  d                  //已下载流量
-  transfer_enable    //可用流量（总量）
-  port               //ss端口
-  switch             //保留字段
-  enable             //启用或禁用ss帐号（1启用，0禁用）
-  type               //保留字段
-  last_get_gift_time    //保留字段
-  last_rest_pass_time   //保留字段
-```
-
 ### 服务端运行与停止 ###
 
 进入根目录：
@@ -97,9 +79,13 @@ API_INTERFACE = 'sspanelv2' //修改接口类型
 
 `chmod +x *.sh`
 
-后台运行（ssh窗口关闭后也继续运行） 
+后台运行（无log，ssh窗口关闭后也继续运行） 
 
 `./run.sh`
+
+后台运行（输出log，ssh窗口关闭后也继续运行） 
+
+`./logrun.sh`
 
 后台运行时查看运行情况 
 
@@ -127,24 +113,6 @@ API_INTERFACE = 'sspanelv2' //修改接口类型
 ### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
 
-如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，发现进程不存在，那么可能是达到了系统的最大连接数 
-
-如果是ubuntu/centos均可修改`/etc/sysctl.conf`
-
-找到`fs.file-max`这一行，修改其值为1024000，并保存退出。然后执行`sysctl -p`使其生效
-
-打开文件`/etc/security/limits.conf`
-
-添加两行： 
-```
-*               soft    nofile           512000
-*               hard    nofile          1024000
-```
-保存后，重启操作系统生效
-
-针对ubuntu系统，你还需要额外的在运行前使用ulimit命令设置最大文件数，可使用附带的运行脚本。  
-如果使用supervisor进程守护，需要修改文件`/etc/default/supervisor`，添加一行：  
-`ulimit -n 512000`  
-再启动你的服务
+其它参见 https://github.com/breakwa11/shadowsocks-rss/wiki/ulimit
 
 [ss-panel]:            https://github.com/orvice/ss-panel
