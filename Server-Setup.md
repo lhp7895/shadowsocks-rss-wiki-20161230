@@ -1,6 +1,8 @@
 # ShadowsocksR 服务端安装教程 #
 ###说明：###
-此教程为单用户版，适合个人用户。如果你是站长，请查看多用户版教程：[多用户版教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mysql))
+此教程为单用户版，适合个人用户。如果你是站长，请查看多用户版教程：  
+[数据库多用户教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mysql))  
+[json版多用户教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mudbjson))（仅一台服务器适用）
 
 基本库安装 
 -----
