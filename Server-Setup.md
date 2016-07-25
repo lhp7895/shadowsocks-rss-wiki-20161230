@@ -52,136 +52,13 @@ tail -f /var/log/shadowsocks.log
 
 用 -h 查看所有参数
 
-####通过配置文件运行####
+####修改配置文件####
 
 建立配置文件，如果你的ss目录是`/root/shadowsocks`  
-`vi /root/shadowsocks/user-config.json`  
-即写于ss的主目录下（或通过执行`cp config.json user-config.json`快速创建一个）
+通过执行`cp config.json user-config.json`快速创建一个
 
-写入以下内容：
-```javascript
-{
-    "server": "0.0.0.0",
-    "server_ipv6": "::",
-    "server_port": 8388,
-    "local_address": "127.0.0.1",
-    "local_port": 1080,
-    "password": "mypassword",
-    "timeout": 120,
-    "method": "aes-256-cfb",
-    "protocol": "auth_sha1_compatible",
-    "protocol_param": "",
-    "obfs": "tls1.2_ticket_auth_compatible",
-    "obfs_param": "",
-    "redirect": "",
-    "dns_ipv6": false,
-    "fast_open": false,
-    "workers": 1
-}
-```
-
-各选项说明：
-
-Name    |    Explanation  | 中文说明
-------- | --------------- | ---------------
-server |	the address your server listens | 监听地址
-server_ipv6 |   the ipv6 address your server listens  | ipv6地址
-server_port |	server port                     | 监听端口
-local_address|	the address your local listens  | 本地地址
-local_port |	local port                      | 本地端口
-password |	password used for encryption    | 密码
-timeout |	in seconds                      | 超时时间
-method |	default: "aes-256-cfb", see Encryption | 加密方式
-protocol |      default："origin"     | 协议插件，默认"origin"
-protocol_param |      default：""     | 协议插件参数，默认""
-obfs   |      default："tls1.2_ticket_auth_compatible"     | 混淆插件，默认"tls1.2_ticket_auth_compatible"
-obfs_param |      default：""     | 混淆插件参数，默认""
-redirect |      default：""     | 重定向参数，默认""
-dns_ipv6|     default:false  | 是否优先使用IPv6地址，有IPv6时可开启
-fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
-workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
-
-其中各protocol与obfs介绍参见：[混淆插件说明]
-
-注：客户端的protocol和obfs配置必须与服务端的一致，除非服务端配置为兼容插件。
-
-redirect参数说明：
-
-值为空字符串或一个列表，若为列表示例如  
-"redirect":["bing.com", "cloudflare.com:443"],  
-作用是在连接方的数据不正确的时候，把数据重定向到列表中的其中一个地址和端口（不写端口则视为80），以伪装为目标服务器。
-
-dns_ipv6参数说明：
-
-为true则指定服务器优先使用IPv6地址。仅当服务器能访问IPv6地址时可以用，否则会导致有IPv6地址的网站无法打开。
-
-一般情况下，只需要修改以下五项即可：
-```
-"server_port":8388,        //端口
-"password":"password",     //密码
-"protocol":"origin",       //协议插件
-"obfs":"http_simple",      //混淆插件
-"method":"aes-256-cfb",    //加密方式
-```
-
-####多端口配置####
-如果要多个用户一起使用的话，请写入以下配置：
-
-```javascript
-{
-    "server":"0.0.0.0",
-    "server_ipv6": "[::]",
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "port_password":{
-        "80":"password1",
-        "443":"password2"
-    },
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "protocol": "auth_sha1_compatible",
-    "protocol_param": "",
-    "obfs": "http_simple_compatible",
-    "obfs_param": "",
-    "redirect": "",
-    "dns_ipv6": false,
-    "fast_open": false,
-    "workers": 1
-}
-```
-按照格式修改端口和密码：
-```
-    "port_password":{                  
-        "80":"password1",       //端口和密码1
-        "443":"password2"       //端口和密码2 
-    },         
-```
-
-如果要为每个端口配置不同的混淆协议，请写入以下配置：
-
-```javascript
-{
-    "server":"0.0.0.0",
-    "server_ipv6":"::",
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "port_password":{
-        "8388":{"protocol":"auth_simple", "password":"abcde", "obfs":"http_simple", "obfs_param":""},
-        "8389":{"protocol":"origin", "password":"abcde"}
-    },
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "protocol": "auth_sha1_compatible",
-    "protocol_param": "",
-    "obfs": "http_simple_compatible",
-    "obfs_param": "",
-    "redirect": "",
-    "dns_ipv6": false,
-    "fast_open": false,
-    "workers": 1
-}
-```
-按格式修改端口、密码以及混淆协议。也可以和以前的格式混合使用，如果某个端口不配置混淆协议，则会使用下面的默认"obfs"配置。
+修改`user-config.json`中的`server_port`，`password`等字段，具体可参见：  
+https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
 
 
 ####运行子目录内的server.py：####
@@ -210,19 +87,6 @@ tail -f /var/log/shadowsocks.log
 `git pull`  
 成功后重启ss服务
 
-服务器搭建
---------
-
-建议选择 Ubuntu 14.04 LTS 作为服务器以便使用 [TCP Fast Open]。
-
-除非有明确理由，不建议用对新手不友好的 CentOS，如果你是rpm系的死忠，建议使用Fedora。
-
-为了更好的性能，VPS 尽量选择 XEN 或 KVM，不建议使用 OpenVZ。推荐使用以下 VPS：
-
-- [Digital Ocean] 自带的内核无需自己编译模块即可使用 [hybla] 算法
-- [Linode] 功能强大，机房较多
-- [Vultr] 价格实惠，机房较多，经常有赠送
-- [Dediserve] 主机稳定，机房众多，美中不足的是国内线路不是特别好
 
 客户端
 ------
@@ -243,32 +107,11 @@ tail -f /var/log/shadowsocks.log
 其它参见 https://github.com/breakwa11/shadowsocks-rss/wiki/ulimit
 
 
-[混淆插件说明]:        https://github.com/breakwa11/shadowsocks-rss/wiki/obfs
 [Python]:            https://github.com/breakwa11/shadowsocks-rss/wiki/Python-client
 [Linux]:             https://github.com/librehat/shadowsocks-qt5
 [Android]:           https://github.com/shadowsocks/shadowsocks-android
-[Build Status]:      https://img.shields.io/travis/shadowsocks/shadowsocks/master.svg?style=flat
-[Chinese Readme]:    https://github.com/shadowsocks/shadowsocks/wiki/Shadowsocks-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
-[配置文件]:     https://github.com/shadowsocks/shadowsocks/wiki/Configuration-via-Config-File
-[Coverage Status]:   https://jenkins.shadowvpn.org/result/shadowsocks
-[Coverage]:          https://jenkins.shadowvpn.org/job/Shadowsocks/ws/htmlcov/index.html
 [Debian sid]:        https://packages.debian.org/unstable/python/shadowsocks
 [iOS]:               https://github.com/shadowsocks/shadowsocks-iOS/wiki/Help
-[Issue Tracker]:     https://github.com/shadowsocks/shadowsocks/issues?state=open
-[TCP Fast Open]:     https://github.com/clowwindy/shadowsocks/wiki/TCP-Fast-Open
-[在 Windows 上安装服务端]: https://github.com/shadowsocks/shadowsocks/wiki/Install-Shadowsocks-Server-on-Windows
-[Mailing list]:      https://groups.google.com/group/shadowsocks
 [OpenWRT]:           https://github.com/shadowsocks/openwrt-shadowsocks
 [OS X]:              https://github.com/shadowsocks/shadowsocks-iOS/wiki/Shadowsocks-for-OSX-Help
-[PyPI]:              https://pypi.python.org/pypi/shadowsocks
-[PyPI version]:      https://img.shields.io/pypi/v/shadowsocks.svg?style=flat
-[Travis CI]:         https://travis-ci.org/shadowsocks/shadowsocks
-[Troubleshooting]:   https://github.com/shadowsocks/shadowsocks/wiki/Troubleshooting
-[Wiki]:              https://github.com/shadowsocks/shadowsocks/wiki
 [Windows]:           https://github.com/breakwa11/shadowsocks-csharp
-[Dediserve]:         https://manage.dediserve.com/?affid=354
-[Vultr]:             http://www.vultr.com/?ref=6822492
-[Digital Ocean]:     https://www.digitalocean.com/?refcode=b1cddd149721
-[Linode]:            https://www.linode.com/?r=e7932c8b03f9abc8aab71663b90b689a676402d1
-[hybla]:             https://github.com/shadowsocks/shadowsocks/wiki/Optimizing-Shadowsocks
-[Bandwagon Host]:    https://bandwagonhost.com/aff.php?pid=6908
