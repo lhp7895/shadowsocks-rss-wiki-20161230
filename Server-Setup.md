@@ -126,32 +126,9 @@ dns_ipv6|     default:false  | 是否优先使用IPv6地址，有IPv6时可开�
 fast_open |	use TCP_FASTOPEN, true / false         | 快速打开(仅限linux客户端)
 workers	| number of workers, available on Unix/Linux   |线程（仅限linux客户端）
 
-其中protocol有如下取值：
+其中各protocol与obfs介绍参见：[混淆插件说明]
 
-protocol| 说明
--------|----------
-"origin"|原版协议
-"verify_simple"|带校验的协议
-"verify_deflate"|带压缩的协议
-"verify_sha1"|带验证抗CCA攻击的协议，可兼容libev的OTA
-"auth_simple"|抗重放攻击的协议
-"auth_sha1"|带验证抗CCA攻击且抗重放攻击的协议
-"auth_sha1_v2"|类似"auth_sha1"，提供更好的长度混淆特性
-
-其中obfs有如下取值：
-
-obfs   | 说明
--------|----------
-"plain"|不混淆
-"http_simple"|伪装为http协议
-"tls_simple"|伪装为tls协议（不建议使用）
-"random_head"|发送一个随机包再通讯的协议
-"tls1.0_session_auth"|伪装为tls session握手协议（不建议使用），同时能抗重放攻击
-"tls1.2_ticket_auth"|伪装为tls ticket握手协议（强烈推荐），同时能抗重放攻击
-
-各混淆插件的说明请点击这里查看：[混淆插件说明]
-
-注：客户端的protocol和obfs配置必须与服务端的一致。
+注：客户端的protocol和obfs配置必须与服务端的一致，除非服务端配置为兼容插件。
 
 redirect参数说明：
 
