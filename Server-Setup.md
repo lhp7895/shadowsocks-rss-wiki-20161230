@@ -105,6 +105,9 @@ OSX上可使用GoAgentX的SSR插件。在你本地的 PC 或手机上使用图�
 
 也可以直接使用 [Python] 版客户端（命令行）。
 
+### 其它加密支持 ###
+安装[libsodium]即可支持 salsa20, chacha20, chacha20-ietf 加密
+
 ### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
 
@@ -120,3 +123,4 @@ OSX上可使用GoAgentX的SSR插件。在你本地的 PC 或手机上使用图�
 [OpenWRT]:           https://github.com/shadowsocks/openwrt-shadowsocks
 [OS X]:              https://github.com/shadowsocks/shadowsocks-iOS/wiki/Shadowsocks-for-OSX-Help
 [Windows]:           https://github.com/breakwa11/shadowsocks-csharp
+[libsodium]:         https://github.com/breakwa11/shadowsocks-rss/wiki/libsodium
