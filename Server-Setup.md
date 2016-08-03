@@ -79,7 +79,6 @@ python server.py -d stop/restart
 查看日志：
 ```
 tail -f /var/log/shadowsocks.log
-
 ```
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
