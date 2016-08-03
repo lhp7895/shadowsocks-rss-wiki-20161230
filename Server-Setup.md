@@ -80,8 +80,6 @@ python server.py -d stop/restart
 ```
 tail -f /var/log/shadowsocks.log
 
-### 自启动 ###
-[System startup script](https://github.com/breakwa11/shadowsocks-rss/wiki/System-startup-script)  
 ```
 ### 更新源代码 ###
 如果代码有更新可用本命令更新代码
@@ -92,6 +90,8 @@ tail -f /var/log/shadowsocks.log
 `git pull`  
 成功后重启ss服务
 
+### 自启动 ###
+[System startup script](https://github.com/breakwa11/shadowsocks-rss/wiki/System-startup-script)  
 
 客户端
 ------
