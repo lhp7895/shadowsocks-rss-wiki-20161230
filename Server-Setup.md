@@ -54,7 +54,7 @@ tail -f /var/log/shadowsocks.log
 
 用 -h 查看所有参数
 
-####修改配置文件####
+####使用配置文件运行####
 
 建立配置文件，如果你的ss目录是`/root/shadowsocks`  
 通过执行`cp config.json user-config.json`快速创建一个
