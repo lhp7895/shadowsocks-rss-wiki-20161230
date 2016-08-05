@@ -63,7 +63,7 @@ tail -f /var/log/shadowsocks.log
 https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
 
 
-####运行子目录内的server.py：####
+运行子目录内的server.py：
 ```
 python server.py
 ```
