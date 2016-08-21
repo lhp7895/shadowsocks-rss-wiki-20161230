@@ -54,6 +54,8 @@ API_INTERFACE = 'sspanelv2' //修改接口类型
 ```
 以上包括（按次序）：数据库服务器地址，端口，数据库登陆用户名，密码，数据库表，节点ID（sspanelv3支持），流量比率，开启mysql的SSL连接等等
 
+要注意**sspanelv3必须正确填写node_id才能正常使用**，并且在填写该ID前，必须在面板上已经添加好该节点，以确定节点ID后，再在此处填写。
+
 文件config.json复制一份到user-config.json，然后编辑： 
 ```
 "method":"aes-256-cfb",                   //修改成您要的加密方式的名称
