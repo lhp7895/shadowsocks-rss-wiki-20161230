@@ -16,7 +16,8 @@
 针对centos,还需要于/etc/pam.d/login检查有没有session required pam_limits.so，没有就加上
 保存后，重启操作系统生效
 
-针对ubuntu系统，你还需要额外的在运行前使用ulimit命令设置最大文件数，可使用附带的运行脚本。  
+针对ubuntu系统，你还需要额外的在运行前使用ulimit命令设置最大文件数，可使用附带的运行脚本。
+
 如果使用supervisor进程守护，需要修改文件`/etc/default/supervisor`，添加一行：  
 `ulimit -n 512000`  
 再启动你的服务
