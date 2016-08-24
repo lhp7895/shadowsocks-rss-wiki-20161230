@@ -1,6 +1,6 @@
 # 修改系统连接数
 
-如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，查log的时候发现报很多这种错误`Too many open files`，那么是达到了系统的最大连接数
+如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，查log的时候发现报很多这种错误`Too many open files`，那么是达到了系统的最大文件数
 
 如果是ubuntu/centos均可修改`/etc/sysctl.conf`
 
