@@ -115,6 +115,10 @@ API_INTERFACE = 'sspanelv2' //修改接口类型
 ### 其它异常 ###
 如果你的服务端python版本在2.6以下，那么必须更新python到2.6.x或2.7.x版本
 
+如果连接数据库遇到这个错误：`Can't get hostname for your address`，请在数据库服务器的 my.cnf 里 mysqld 添加如下设置  
+`skip-name-resolve`  
+然后重启数据库。
+
 其它参见 https://github.com/breakwa11/shadowsocks-rss/wiki/ulimit
 
 [ss-panel]:            https://github.com/orvice/ss-panel
