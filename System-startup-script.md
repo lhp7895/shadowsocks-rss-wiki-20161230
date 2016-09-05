@@ -103,11 +103,16 @@ systemd脚本，适用于CentOS/RHEL7以上，Ubuntu 15以上，Debian8以上
 Description=Start or stop the ShadowsocksR server
 After=network.target
 Wants=network.target
+
 [Service]
 Type=forking
 PIDFile=/var/run/shadowsocks.pid
 ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d start
 ExecStop=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d stop
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
 [Install]
 WantedBy=multi-user.target
 ```
