@@ -23,7 +23,7 @@ C->S方向
 
 其它插件不推荐使用，在这里忽略
 
-客户端的协议插件，仅建议使用`origin`,`verify_sha1`,`auth_sha1`,`auth_sha1_v2`，解释如下：  
+客户端的协议插件，仅建议使用`origin`,`verify_sha1`,`auth_sha1`,`auth_sha1_v2`,`auth_sha1_v3`，解释如下：  
 `origin`：原版协议，为了兼容  
 `verify_sha1`：原版OTA协议，为了兼容  
 `auth_sha1`：高安全性，有时间校对要求，混淆强度中等  
