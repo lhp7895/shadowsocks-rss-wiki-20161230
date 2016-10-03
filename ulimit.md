@@ -18,6 +18,9 @@
 
 针对ubuntu系统，你还需要额外的在运行前使用ulimit命令设置最大文件数，可使用附带的运行脚本。
 
+
 如果使用supervisor进程守护，需要修改文件`/etc/default/supervisor`，添加一行：  
 `ulimit -n 512000`  
+针对centos7，你还需要在/usr/lib/systemd/system/supervisord.service的service段添加  
+`LimitNOFILE=512000`  
 再启动你的服务
