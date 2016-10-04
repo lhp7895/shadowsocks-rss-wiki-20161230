@@ -1,5 +1,6 @@
 # ShadowsocksR 服务端安装教程 #
 ###说明：###
+不建议使用一键脚本安装，除非你自己能维护其功能，否则安装时若出了问题很难查。  
 此教程为单用户版，适合个人用户。如果你是站长，请查看多用户版教程：  
 [数据库多用户教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mysql))  
 [json版多用户教程](https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mudbjson))（仅一台服务器适用）
