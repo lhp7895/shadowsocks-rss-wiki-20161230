@@ -3,7 +3,12 @@
 如果要使用 salsa20 或 chacha20 或 chacha20-ietf 算法，请安装 [libsodium](https://github.com/jedisct1/libsodium) :  
       
 centos：
-  
+
+```
+yum install epel-release
+yum install libsodium
+```
+如果想自己编译，那么可以用以下的命令
 ```
 yum -y groupinstall "Development Tools"
 wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
