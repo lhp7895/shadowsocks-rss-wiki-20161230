@@ -25,7 +25,13 @@ apt-get install git
 
 
 ### 服务端配置 ###
-shadowsocks目录内，把apiconfig.py复制为userapiconfig.py后，对userapiconfig.py里以上内容进行相应修改： 
+进入根目录初始化配置(假设根目录在`~/shadowsocks`，如果不是，命令需要适当调整)：
+```
+cd ~/shadowsocks
+bash initcfg.sh
+```
+
+shadowsocks目录内，对userapiconfig.py里以上内容进行相应修改： 
 ```
 API_INTERFACE = 'mudbjson' //修改接口类型
 ```
@@ -34,10 +40,6 @@ API_INTERFACE = 'mudbjson' //修改接口类型
 `python mujson_mgr.py`
 
 ### 服务端运行与停止 ###
-
-增加脚本可执行权限 
-
-`chmod +x *.sh`
 
 后台运行（无log，ssh窗口关闭后也继续运行） 
 
