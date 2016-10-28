@@ -31,7 +31,7 @@ cd ~/shadowsocks
 bash initcfg.sh
 ```
 
-shadowsocks目录内，对userapiconfig.py里以上内容进行相应修改： 
+shadowsocks目录内，对userapiconfig.py里以下内容进行相应修改： 
 ```
 API_INTERFACE = 'mudbjson' //修改接口类型
 ```
