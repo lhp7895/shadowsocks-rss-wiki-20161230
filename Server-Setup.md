@@ -29,9 +29,15 @@ ubuntu/debian：
 
 服务端配置
 -----
-进入子目录：
+进入根目录初始化配置(假设根目录在`~/shadowsocks`，如果不是，命令需要适当调整)：
 ```
-cd shadowsocks/shadowsocks
+cd ~/shadowsocks
+bash initcfg.sh
+```
+
+以下步骤要进入子目录：
+```
+cd ~/shadowsocks/shadowsocks
 ```
 
 ####快速运行####
@@ -57,9 +63,7 @@ tail -f /var/log/shadowsocks.log
 
 ####使用配置文件运行####
 
-建立配置文件，如果你的ss目录是`/root/shadowsocks`  
-通过执行`cp config.json user-config.json`快速创建一个
-
+如果你的ss目录是`~/shadowsocks`，进入这里  
 修改`user-config.json`中的`server_port`，`password`等字段，具体可参见：  
 https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
 
