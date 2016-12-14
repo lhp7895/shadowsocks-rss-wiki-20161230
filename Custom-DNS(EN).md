@@ -15,7 +15,7 @@ called `DNS.conf` with the following content:
 ```
 
 1 DNS server per line, port number is optional. Server software versions less
-than 2.9.4 does not support this feature.
+than 2.9.4 do not support this feature.
 
 ## Configuration 2
 Use the System default `resolv.conf`.
