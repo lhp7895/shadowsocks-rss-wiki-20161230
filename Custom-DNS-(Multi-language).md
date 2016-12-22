@@ -1,5 +1,5 @@
 # 方案一
-在配置文件所在目录下（与config.json同目录），新建dns.conf文件，内容格式如下：
+在源码 server.py 所在目录下（自定义 config.json 可能不在这个目录），新建dns.conf文件，内容格式如下：
 ```
 8.8.8.8 53
 8.8.4.4 53
@@ -25,7 +25,7 @@ It allows the clients who requested remote DNS resolution on the server side to
 query the domain names against whichever DNS server this file specifies.
 
 ## Configuration 1
-At the configuration folder (where `config.json` resides), put a new file
+At the source code folder (where `server.py` resides), put a new file
 called `DNS.conf` with the following content:
 
 ```
