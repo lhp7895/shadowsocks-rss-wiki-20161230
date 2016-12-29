@@ -98,17 +98,18 @@ chmod 755 /etc/init.d/shadowsocks ; update-rc.d shadowsocks defaults ; service s
 
 systemd脚本，适用于CentOS/RHEL7以上，Ubuntu 15以上，Debian8以上
 
+单用户版
 ```
 [Unit]
-Description=Start or stop the ShadowsocksR server
+Description=ShadowsocksR server
 After=network.target
 Wants=network.target
 
 [Service]
 Type=forking
 PIDFile=/var/run/shadowsocks.pid
-ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d start
-ExecStop=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d stop
+ExecStart=/usr/bin/python /usr/local/shadowsocks/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d start
+ExecStop=/usr/bin/python /usr/local/shadowsocks/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d stop
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=always
@@ -116,5 +117,28 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
+多用户版
+```
+[Unit]
+Description=ShadowsocksR server
+After=syslog.target
+After=network.target
+
+[Service]
+LimitCORE=infinity
+LimitNOFILE=512000
+LimitNPROC=512000
+Type=simple
+WorkingDirectory=/usr/local/shadowsocks
+ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
 请将上述脚本保存为/etc/systemd/system/shadowsocks.service     
 并执行`systemctl enable shadowsocks.service && systemctl start shadowsocks.service`
